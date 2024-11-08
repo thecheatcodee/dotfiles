@@ -1,0 +1,16 @@
+!.config/**
+!.zshrc
+
+.git
+node_modules
+venv
+site-packages
+
+# Macos
+Library
+Pictures
+
+
+
+
+

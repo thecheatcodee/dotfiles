@@ -40,7 +40,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -77,7 +77,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -124,15 +124,16 @@ alias ze='zellij attach'
 alias neofetch='fastfetch'
 alias grep='rg'
 alias find='fd'
+alias lg='lazygit'
+alias cd='z'
+alias del='trash'
+alias rm='rm -i'
 # alias ls='eza --color=always --long --git --icons=always --no-user'
-# alias cd='z '
 
-
-export LANG=en_US.UTF-8
 
 # ============================ FZF ===================================
 # Use ~~ as the trigger sequence instead of the default **
-export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_TRIGGER='??'
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git  . $HOME' 
 # export FZF_CTRL_R_COMMAND=""
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND" # CTRL-T to fuzzily search for a file or directory in your home directory then insert its path at the cursor 
@@ -170,7 +171,8 @@ function proxy_off(){
 }
 
 # Alacritty theme switcher
-alias themes="ls ~/.config/alacritty/themes/themes | fzf | xargs -I {} ln -sf ~/.config/alacritty/themes/themes/{} ~/.config/alacritty/current_theme.toml && echo "@@@" >> ~/.config/alacritty/alacritty.yml && sed -i '/@@@/d' ~/.config/alacritty/alacritty.yml"
+# alias themes="ls ~/.config/alacritty/themes/themes | fzf | xargs -I {} ln -sf ~/.config/alacritty/themes/themes/{} ~/.config/alacritty/current_theme.toml && echo "@@@" >> ~/.config/alacritty/alacritty.yml && sed -i '/@@@/d' ~/.config/alacritty/alacritty.yml"
+
 
 # ========================= VI MODE =================================
 

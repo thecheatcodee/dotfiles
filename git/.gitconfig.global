@@ -1,0 +1,35 @@
+[core]
+  excludesfile = ~/.dotfiles/Git/.gitignore.global
+
+[user]
+  name = Zach Lu
+  email = lv2497712968@outlook.com 
+  signingkey = 
+
+[push]
+  default = simple
+  followTags = true
+
+[pull]
+  rebase = true
+
+[init]
+  defaultBranch = main
+
+[hub]
+  protocol = ssh
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  allowedSignersFile = ~/.ssh/allowed_signers
+
+
+# Company/Project Specific Configs
+[includeIf "gitdir:~/code/apple/"]
+  path = ~/code/apple/.gitconfig

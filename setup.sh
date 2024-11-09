@@ -7,7 +7,7 @@ create_symlink() {
 
   # 检查目标是否为目录或文件且不是符号链接
   if [ -e "$dest" ] && [ ! -L "$dest" ]; then
-    # 如果备份文件已存在，添加数字后缀避免覆盖
+
     n=1
     while [ -e "$backup" ]; do
       backup="$dest.bak.$n"

@@ -95177,6 +95177,8 @@
 	</dict>
 	<key>PreserveWindowSizeWhenTabBarVisibilityChanges</key>
 	<false/>
+	<key>SavePasteHistory</key>
+	<false/>
 	<key>SeparateStatusBarsPerPane</key>
 	<false/>
 	<key>ShowNewOutputIndicator</key>
@@ -95187,6 +95189,8 @@
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.1994586240898058</real>
+	<key>StatusBarHeight</key>
+	<real>15</real>
 	<key>StatusBarIcon</key>
 	<true/>
 	<key>StatusBarPosition</key>
@@ -95198,9 +95202,9 @@
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>TerminalMargin</key>
-	<integer>14</integer>
-	<key>TerminalVMargin</key>
 	<integer>8</integer>
+	<key>TerminalVMargin</key>
+	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
 	<key>TraditionalVisualBell</key>

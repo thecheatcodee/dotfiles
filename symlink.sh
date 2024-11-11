@@ -25,6 +25,7 @@ create_symlink() {
 }
 
 # 使用函数创建符号链接
+create_symlink "$DOTFILES/neovide" "$HOME/.config/neovide/"
 create_symlink "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 create_symlink "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
 create_symlink "$DOTFILES/btop" "$HOME/.config/btop"

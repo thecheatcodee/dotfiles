@@ -5,6 +5,7 @@
 node_modules
 venv
 site-packages
+.DS_Store
 
 # Macos
 Library

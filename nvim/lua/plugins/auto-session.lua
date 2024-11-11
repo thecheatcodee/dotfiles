@@ -1,8 +1,9 @@
 ---@type NvPluginSpec
 return {
   "rmagatti/auto-session",
-  enabled = true,
+  enabled = false,
   event = "VimEnter",
+  lazy = false,
   keys = {
     { "<leader>qs", "<cmd>SessionSave<cr>", desc = "Save session" },
     { "<leader>qd", "<cmd>SessionDelete<cr>", desc = "Delete current session" },

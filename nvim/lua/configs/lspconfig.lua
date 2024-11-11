@@ -8,13 +8,13 @@ local servers = {
   "html",
   "cssls",
   "clangd",
-  "pyright",
+  "basedpyright",
   "gopls",
   "ruff",
   "ts_ls",
   "jsonls",
   "dockerls",
-  -- "lua_ls",
+  "kulala_ls",
   "vuels",
   "yamlls"
 }

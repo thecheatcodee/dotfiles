@@ -23,10 +23,11 @@ local custom = {
     foldnestmax = 5,
     fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "", lastline = " " },
     -- Prevent issues with some language servers
-    -- backup = false,
-    -- swapfile = false,
+    backup = false,
+    swapfile = false,
     -- Always show minimum n lines after/before current line
     scrolloff = 10,
+    sidescrolloff = 15,
     -- True color support
     termguicolors = true,
     emoji = false,
@@ -49,9 +50,14 @@ local custom = {
     lazyredraw = false,
     iskeyword = vim.opt.iskeyword:append { "_", "@", ".", "-" },
     path = vim.opt.path:append { "**", "lua", "src" },
-
+    sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" },
+    grepprg = "rg --vimgrep",
     -- whichwrap = vim.opt.whichwrap
     -- whichwrap = {"[", "]", "<", ">"} -- 光标行尾时可以跳到下一行的按键
+
+    -- Undo
+    undofile = true,
+    undolevels = 10000,
   },
 }
 

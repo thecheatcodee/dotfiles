@@ -1,5 +1,6 @@
 return {
   "aznhe21/actions-preview.nvim",
+  enabled = false,
   -- event = "VimEnter",
   event = "VeryLazy",
   config = function()

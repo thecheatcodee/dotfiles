@@ -32,6 +32,15 @@ local options = {
       select = true,
     },
 
+    ["<S-CR>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+
+    -- FIXME: 没用
+    -- ["Down"] = cmp.mapping.select_next_item(),
+    -- ["Up"]   = cmp.mapping.select_prev_item(),
+
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()

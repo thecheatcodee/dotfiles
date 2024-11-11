@@ -28,7 +28,7 @@ autocmd("VimEnter", {
       })
     end
   end,
-  group = general,
+  -- group = general,
   desc = "Switch input method to ABC when leaving insert mode",
 })
 
@@ -37,36 +37,45 @@ autocmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions:remove { "c", "r", "o" }
   end,
-  group = general,
+  -- group = general,
   desc = "Prevent auto comment new line",
 })
 
-autocmd("FileType", {
-  pattern = { "markdown", "text" },
-  callback = function()
-    vim.opt_local.spell = false
-  end,
 
-  desc = "Disable spell checking for markdown and txt files",
+-- wrap and check for spell in text filetypes
+autocmd("FileType", {
+  -- group = augroup("wrap_spell"),
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = false
+    -- vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
+  end,
 })
+
+
 
 autocmd("BufEnter", {
   nested = true,
   callback = function()
     if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-      vim.cmd "silent quitall"
+      -- FIXME: 当存在隐藏的未保存的buffer时会报错
+      -- vim.cmd "silent quitall"
+
+      vim.cmd "silent xall"
     end
   end,
-  group = general,
+  -- group = general,
   desc = "Close nvim if NvimTree is only running buffer",
 })
 
--- FIXME: 不起作用
--- autocmd("TextYankPost", {
---   desc = "Highlight on yank",
---   command = "silent! lua vim.highlight.on_yank({higroup='YankVisual', timeout=200})",
---   -- group = augroup("YankHighlight", { clear = true }),
--- })
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  -- group = augroup("highlight_yank"),
+  callback = function()
+    (vim.hl or vim.highlight).on_yank()
+  end,
+})
 
 -- FIXME: 报错
 -- autocmd("VimEnter", {
@@ -122,15 +131,6 @@ autocmd("FileChangedShellPost", {
   command = [[echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None]],
 })
 
--- 在 markdown 和 txt 文件中启用 wrap
-autocmd("FileType", {
-  pattern = { "markdown", "text" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
-  end,
-})
-
 
 -- 将打开的目录设为工作目录
 autocmd("VimEnter", {
@@ -142,7 +142,6 @@ autocmd("VimEnter", {
   end,
 })
 
--- FIXME: 和auto-session冲突
 -- -- 识别 git 工作目录
 -- autocmd("BufEnter", {
 --   callback = function()
@@ -155,3 +154,83 @@ autocmd("VimEnter", {
 --     end
 --   end,
 -- })
+
+-- 识别http
+autocmd({"BufRead","BufNewFile"}, {
+  pattern = {'*.http', '*.rest'},
+  command = "set filetype=http"
+})
+
+-- resize splits if window got resized
+autocmd({ "VimResized" }, {
+  -- group = augroup("resize_splits"),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+  -- group = augroup("close_with_q"),
+  pattern = {
+    "PlenaryTestPopup",
+    "checkhealth",
+    "dbout",
+    "gitsigns-blame",
+    "grug-far",
+    "help",
+    "lspinfo",
+    "neotest-output",
+    "neotest-output-panel",
+    "neotest-summary",
+    "notify",
+    "qf",
+    "snacks_win",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set("n", "q", function()
+        vim.cmd("close")
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = "Quit buffer",
+      })
+    end)
+  end,
+})
+
+-- make it easier to close man-files when opened inline
+vim.api.nvim_create_autocmd("FileType", {
+  -- group = augroup("man_unlisted"),
+  pattern = { "man" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+  end,
+})
+
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  -- group = augroup("last_loc"),
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+

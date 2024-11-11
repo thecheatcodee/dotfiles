@@ -20,6 +20,7 @@ My Neovim config
 - Stackoverflow
 
 ## 目录结构
+
 ```text
 
 
@@ -52,6 +53,7 @@ My Neovim config
 - action-preview 使用telescope选择code actions  
 
 ### 其他
+
 
 - winresize.nvim 窗口resize逻辑优化
 - codesnap.nvim 代码截图 

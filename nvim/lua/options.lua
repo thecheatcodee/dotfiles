@@ -17,7 +17,7 @@ local custom = {
     foldmethod = "expr",
     foldexpr = "v:lua.vim.treesitter.foldexpr()",
     -- foldcolumn = "1",
-    foldtext = "",
+    -- foldtext = "",
     foldlevel = 99,
     foldlevelstart = 5,
     foldnestmax = 5,
@@ -43,6 +43,11 @@ local custom = {
     expandtab = true,
     autoindent = true,
     cursorline = true,
+    guicursor = {
+        "n-v-c:block-Cursor/lCursor",   -- 普通、可视和命令模式下使用块状光标
+        "i:ver25-Cursor",               -- 插入模式下使用垂直条状光标，宽度为 25%
+        "r:hor20",                      -- 替换模式下使用水平条状光标，厚度为 20%
+    },
     cursorlineopt = "both",
     inccommand = "split",
     ignorecase = true,

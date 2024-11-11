@@ -42,6 +42,7 @@ autocmd("BufEnter", {
 })
 
 
+
 -- wrap and check for spell in text filetypes
 autocmd("FileType", {
   -- group = augroup("wrap_spell"),
@@ -55,19 +56,20 @@ autocmd("FileType", {
 
 
 
-autocmd("BufEnter", {
-  nested = true,
-  callback = function()
-    if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-      -- FIXME: 当存在隐藏的未保存的buffer时会报错
-      -- vim.cmd "silent quitall"
-
-      vim.cmd "silent xall"
-    end
-  end,
-  -- group = general,
-  desc = "Close nvim if NvimTree is only running buffer",
-})
+-- FIXME: 启动nvim时如果没有buffer，使用telescope跳转文件时会导致nvim直接退出
+-- autocmd("BufEnter", {
+--   nested = true,
+--   callback = function()
+--     if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+--       -- FIXME: 当存在隐藏的未保存的buffer时会报错
+--       -- vim.cmd "silent quitall"
+--
+--       vim.cmd "silent xall"
+--     end
+--   end,
+--   -- group = general,
+--   desc = "Close nvim if NvimTree is only running buffer",
+-- })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -216,21 +218,21 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- go to last loc when opening a buffer
-vim.api.nvim_create_autocmd("BufReadPost", {
-  -- group = augroup("last_loc"),
-  callback = function(event)
-    local exclude = { "gitcommit" }
-    local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
-      return
-    end
-    vim.b[buf].lazyvim_last_loc = true
-    local mark = vim.api.nvim_buf_get_mark(buf, '"')
-    local lcount = vim.api.nvim_buf_line_count(buf)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
-})
+-- -- go to last loc when opening a buffer
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   -- group = augroup("last_loc"),
+--   callback = function(event)
+--     local exclude = { "gitcommit" }
+--     local buf = event.buf
+--     if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+--       return
+--     end
+--     vim.b[buf].lazyvim_last_loc = true
+--     local mark = vim.api.nvim_buf_get_mark(buf, '"')
+--     local lcount = vim.api.nvim_buf_line_count(buf)
+--     if mark[1] > 0 and mark[1] <= lcount then
+--       pcall(vim.api.nvim_win_set_cursor, 0, mark)
+--     end
+--   end,
+-- })
 

@@ -3,7 +3,6 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
-local del = vim.keymap.del
 
 -- map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("i", "jk", "<ESC>")
@@ -12,7 +11,8 @@ local del = vim.keymap.del
 
 --- Buffer commands
 map("n", "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", { desc = " Switch Buffer" })
-map("n", "<leader><leader>", "<cmd>Telescope find_files<cr>", { desc = " Switch Files" })
+map("n", "<leader><leader>", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+map("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "telescope find commands" })
 
 -- 折叠文本中移动
 -- TODO: 添加autocmd，在映射只在折叠开启的情况下生效

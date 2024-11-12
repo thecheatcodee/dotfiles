@@ -8,7 +8,7 @@
 
 -- TODO:
 
-return  {
+return true and {} or {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
   -- NOTE: And you can specify dependencies as well

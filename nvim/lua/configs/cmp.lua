@@ -38,8 +38,8 @@ local options = {
     },
 
     -- FIXME: 没用
-    -- ["Down"] = cmp.mapping.select_next_item(),
-    -- ["Up"]   = cmp.mapping.select_prev_item(),
+    ["<Down>"] = cmp.mapping.select_next_item(),
+    ["<Up>"]   = cmp.mapping.select_prev_item(),
 
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then

@@ -50,6 +50,9 @@ map("i", "<C-n>", "<nop>")
 map("i", "<C-p>", "<nop>")
 map("n","<Leader>pt", "<nop>") -- TODO: 在WhichKey上禁用
 
+
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
 -- map("n", "<Leader>ft", "", { expr = true, desc = "" })
 
 -- map({ "i", "s" }, "<C-E>", function()

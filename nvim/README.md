@@ -5,6 +5,7 @@ My Neovim config
 
 ![预览](example.png)
 
+
 [[toc]]
 
 ## 配置参考
@@ -75,8 +76,8 @@ My Neovim config
 
 ## 🐞FIXME
 
-- [ ] 复制高亮的autocmd不起作用
-- [ ] markdown-render 的标题不能正确渲染
+- [x] 复制高亮的autocmd不起作用
+- [x] markdown-render 的标题不能正确渲染
 - [x] http treesitter 高亮不工作
 - [ ] kulala创建response结果窗口后，如果想关闭它，会导致bufline的错误
 - [ ] 有未保存的buffer时，自动关闭nvim-tree的autocmd会报错

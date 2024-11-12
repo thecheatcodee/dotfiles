@@ -3,34 +3,29 @@
 -- Add any additional autocmds here
 
 local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
+-- local augroup = vim.api.nvim_create_augroup
 
 -- General Settings
-local general = augroup("General", { clear = true })
+-- local general = augroup("General", { clear = true })
 
 -- Add autocmd for macOS to switch input method to ABC when entering normal mode
-autocmd("VimEnter", {
-  callback = function()
-    if vim.fn.has("mac") and vim.env.SSH_CONNECTION == nil then
-      local imselect_bin = "/usr/local/bin/im-select"
-      if not vim.fn.executable(imselect_bin) then
+if vim.fn.has("mac") and vim.env.SSH_CONNECTION == nil then
+  local imselect_bin = "/usr/local/bin/im-select"
+  if not vim.fn.executable(imselect_bin) then
+    return
+  end
+  vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained" }, {
+    pattern = "*",
+    callback = function()
+      -- 只有在需要时才切换
+      if vim.fn.system(imselect_bin):match "com.apple.keylayout.ABC" ~= nil then
         return
       end
-      vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-        pattern = "*",
-        callback = function()
-          -- 只有在需要时才切换
-          if vim.fn.system(imselect_bin):match "com.apple.keylayout.ABC" ~= nil then
-            return
-          end
-          vim.fn.system(imselect_bin .. " com.apple.keylayout.ABC")
-        end,
-      })
-    end
-  end,
-  -- group = general,
-  desc = "Switch input method to ABC when leaving insert mode",
-})
+      vim.fn.system(imselect_bin .. " com.apple.keylayout.ABC")
+    end,
+  })
+end
+
 
 -- FIXME: 有时不起作用，怀疑是事件顺序问题
 autocmd("BufEnter", {
@@ -71,22 +66,64 @@ autocmd("FileType", {
 --   desc = "Close nvim if NvimTree is only running buffer",
 -- })
 
+-- local function is_modified_buffer_open(buffers)
+--     for _, v in pairs(buffers) do
+--         if v.name:match("NvimTree_") == nil then
+--             return true
+--         end
+--     end
+--     return false
+-- end
+
+-- autocmd("BufEnter", {
+--     nested = true,
+--     callback = function()
+--         if
+--             #vim.api.nvim_list_wins() == 1
+--             and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil
+--             -- and is_modified_buffer_open(vim.fn.getbufinfo({ bufmodified = 1 })) == false
+--         then
+--           -- print("flag")
+--             vim.cmd("quit")
+--         end
+--     end
+-- })
+
+
+
+autocmd("QuitPre", {
+    callback = function()
+        if #vim.api.nvim_list_wins() <= 2 then
+          for _, win in pairs(vim.api.nvim_list_wins()) do
+            local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win))
+            if bufname:match("NvimTree_") ~= nil then
+              require("nvim-tree.api").tree.close()
+            end
+          end
+        end
+    end
+})
+
+--[[
+
+          for _, v in vim.fn.getbufinfo({ bufmodified = 1 }) do
+            print(v.name)
+          end
+          for _, win in pairs(vim.api.nvim_list_wins()) do
+            print(vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win)))
+          end
+
+          for i, v in pairs(vim.fn.getbufinfo({ bufmodified = 1 })) do print(i .. ": " .. v.name) end
+--]]
+
+
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
   -- group = augroup("highlight_yank"),
   callback = function()
     (vim.hl or vim.highlight).on_yank()
   end,
 })
-
--- FIXME: 报错
--- autocmd("VimEnter", {
---   callback = function()
---     require("nvim-tree.api").events.subscribe("FileCreated", function(file)
---       vim.cmd("edit " .. file.name)
---     end)
---   end,
--- })
 
 -- prevent weird snippet jumping behavior
 -- https://github.com/L3MON4D3/LuaSnip/issues/258
@@ -134,25 +171,39 @@ autocmd("FileChangedShellPost", {
 })
 
 
--- 将打开的目录设为工作目录
+-- 设置工作目录
 autocmd("VimEnter", {
   callback = function()
     local arg = vim.fn.argv(0)  -- 获取第一个参数
-    if arg and vim.fn.isdirectory(arg) == 1 then
+    local isdirectory
+    if arg and arg ~= "" then
+      isdirectory = vim.fn.isdirectory(arg) == 1
+---@diagnostic disable-next-line: param-type-mismatch
+      -- isfile = vim.fn.filereadable(arg) == 1
+    end
+
+    if isdirectory then
       vim.cmd("cd " .. arg)
+    end
+
+    -- 获取当前文件的 Git 根目录（如果存在）
+    -- local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+    -- if git_root and git_root ~= "" and vim.fn.isdirectory(git_root) == 1 then
+    --   vim.cmd("cd " .. git_root)
+    --   print("Changed working directory to Git root: " .. git_root)
+    -- end
+
+    if isdirectory then
+      require("nvim-tree.api").tree.open()
     end
   end,
 })
 
--- -- 识别 git 工作目录
--- autocmd("BufEnter", {
---   callback = function()
---     -- 获取当前文件的 Git 根目录（如果存在）
---     local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
---     -- 检查 git 命令是否成功执行（返回非空字符串）
---     if git_root and git_root ~= "" and vim.fn.isdirectory(git_root) == 1 then
---       vim.cmd("cd " .. git_root)
---       print("Changed working directory to Git root: " .. git_root)
+-- autocmd({"BufEnter", "BufRead"} , {
+--   callback = function(args)
+--     local file = args.file
+--     if vim.fn.isdirectory(file) == 1 then
+--       vim.cmd("bdelete") -- 删除缓冲区
 --     end
 --   end,
 -- })
@@ -210,7 +261,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- make it easier to close man-files when opened inline
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
   -- group = augroup("man_unlisted"),
   pattern = { "man" },
   callback = function(event)
@@ -218,21 +269,22 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- -- go to last loc when opening a buffer
--- vim.api.nvim_create_autocmd("BufReadPost", {
---   -- group = augroup("last_loc"),
---   callback = function(event)
---     local exclude = { "gitcommit" }
---     local buf = event.buf
---     if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
---       return
---     end
---     vim.b[buf].lazyvim_last_loc = true
---     local mark = vim.api.nvim_buf_get_mark(buf, '"')
---     local lcount = vim.api.nvim_buf_line_count(buf)
---     if mark[1] > 0 and mark[1] <= lcount then
---       pcall(vim.api.nvim_win_set_cursor, 0, mark)
---     end
---   end,
--- })
+-- go to last loc when opening a buffer
+autocmd("BufReadPost", {
+  -- group = augroup("last_loc"),
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
 

@@ -31,11 +31,12 @@ remember_window_size  no
 initial_window_width  85c
 initial_window_height 35c
  # suffix of "c" on the value means "character cell" instead of pixels
+# draw_minimal_borders yes
 
 # 光标动画 
 cursor_trail 1
-cursor_trail_start_threshold -1 
 # 始终启用光标轨迹
+cursor_trail_start_threshold -1 
 cursor_trail_decay 0.1 0.15 
 
 cursor_blink_interval 0.5
@@ -55,6 +56,6 @@ bold_italic_font auto
 
 
 # BEGIN_KITTY_THEME
-# Ayu
+# 1984 Light
 include current-theme.conf
 # END_KITTY_THEME

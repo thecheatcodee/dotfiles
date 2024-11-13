@@ -11,7 +11,7 @@ return {
   ---@module 'render-markdown'
   ---\@type render.md.UserConfig
   -- opts = {},
-  ft = { "markdown", "quarto" },
+  ft = { "markdown", "quarto", "Avante" },
   config = function()
     local highlights= require("utils.markview-highlights")
     -- 初次加载时应用动态高亮组
@@ -35,8 +35,8 @@ return {
           width = 'block',
           left_pad = 2,
           right_pad = 4,
-          border = true,
-          border_virtual = true,
+          -- border = true,
+          -- border_virtual = true,
           backgrounds = {
               'MarkviewHeading1',
               'MarkviewHeading2',

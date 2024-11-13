@@ -48,41 +48,15 @@ return {
   },
 
   keys = {
-      {
-        '<F5>',
-        function() require('dap').continue() end,
-        desc = 'Debug: Start/Continue',
-      },
-      {
-        '<F1>',
-        function() require('dap').step_into() end,
-        desc = 'Debug: Step Into',
-      },
-      {
-        '<F2>',
-        function() require('dap').step_over() end,
-        desc = 'Debug: Step Over',
-      },
-      {
-        '<F3>',
-        function() require('dap').step_out() end,
-        desc = 'Debug: Step Out',
-      },
-
-      { "<leader>d", "", desc = "+debug", mode = {"n", "v"} },
-      {
-        '<leader>db',
-        function() require('dap').toggle_breakpoint() end,
-        desc = 'Code Debug: Toggle Breakpoint',
-      },
-      {
-        '<leader>dB',
-        function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
-        desc = 'Code Debug: Set Breakpoint',
-      },
-
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
-      { '<F7>', function() require('dapui').toggle() end, desc = 'Debug: See last session result.' },
+      { '<F5>', function() require('dap').continue() end, desc = 'Debug Start/Continue' },
+      { '<F1>', function() require('dap').step_into() end, desc = 'Debug Step Into' },
+      { '<F2>', function() require('dap').step_over() end, desc = 'Debug Step Over'},
+      { '<F3>', function() require('dap').step_out() end, desc = 'Debug Step Out', },
+      { '<F7>', function() require('dapui').toggle() end, desc = 'Debug See last session result.' },
+      { '<leader>du', function() require('dapui').toggle() end, desc = 'Debug UI' },
+      { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Debug Toggle Breakpoint', },
+      { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = 'Debug Set Breakpoint', },
+      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Debug UI Widgets" },
     },
   -- keys = function(_, keys)
   --   local dap = require 'dap'

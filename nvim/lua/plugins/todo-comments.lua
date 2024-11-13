@@ -11,7 +11,7 @@ return {
     -- TODO: 按键冲突，暂时不使用
     -- { "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
     -- { "<leader>xT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-    { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-    { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+    { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find Todo" },
+    { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Find Todo/Fix/Fixme" },
   },
 }

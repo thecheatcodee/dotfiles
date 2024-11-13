@@ -3,7 +3,7 @@ return {
     cmd = "LazyGit",
     -- event = "VeryLazy",
     keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = " Lazygit" },
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Lazygit" },
     },
     lazy = false, -- cannot be lazy to use with telescope
     dependencies = {

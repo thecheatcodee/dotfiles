@@ -17,15 +17,17 @@ local options = {
     -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
     -- ["<C-Space>"] = cmp.mapping.complete(),
-    -- ["<C-e>"] = cmp.mapping.close(),
-    ["<Esc>"] = cmp.mapping(function(fallback)
-      if require("luasnip").locally_jumpable() and cmp.visible() then
-        -- fallback()
-        cmp.close()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    ["<C-e>"] = cmp.mapping.close(),
+
+
+    -- ["<Esc>"] = cmp.mapping(function(fallback)
+    -- --   if require("luasnip").locally_jumpable() and cmp.visible() then
+    --   if  cmp.visible() then
+    --     cmp.close()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s" }),
 
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
@@ -37,7 +39,6 @@ local options = {
       select = true,
     },
 
-    -- FIXME: 没用
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<Up>"]   = cmp.mapping.select_prev_item(),
 

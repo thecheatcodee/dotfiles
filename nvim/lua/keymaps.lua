@@ -1,4 +1,4 @@
-require "nvchad.mappings"
+-- require "nvchad.mappings"
 
 -- add yours here
 
@@ -9,15 +9,19 @@ local map = vim.keymap.set
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
---- Buffer commands
-map("n", "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", { desc = " Switch Buffer" })
-map("n", "<leader><leader>", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
-map("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "telescope find commands" })
 
--- 折叠文本中移动
+map("n", "<leader><leader>", "", { desc = "More Tools" })
+
+--- Buffer commands
+map("n", "<leader><leader><leader>", "<cmd>Telescope find_files<cr>", { desc = "Telescope find files" })
+
 -- TODO: 添加autocmd，在映射只在折叠开启的情况下生效
-map("n", "j", "gj")
-map("n", "k", "gk")
+
+-- better up/down
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 -- map("n", "$", "g$")
 -- map("n", "^", "g^")
 -- map("n", "0", "g0")
@@ -44,43 +48,144 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search R
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- disable
+map("n", "<C-h>", "<C-w>h", { desc = "Switch Window Left" })
+map("n", "<C-l>", "<C-w>l", { desc = "Switch Window Right" })
+map("n", "<C-j>", "<C-w>j", { desc = "Switch Window Down" })
+map("n", "<C-k>", "<C-w>k", { desc = "Switch Window Up" })
 
-map("i", "<C-n>", "<nop>")
-map("i", "<C-p>", "<nop>")
-map("n","<Leader>pt", "<nop>") -- TODO: 在WhichKey上禁用
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear Highlights" })
 
+map("n", "<leader>u", "", { desc = "UI" })
+map("n", "<leader>un", "<cmd>set nu!<CR>", { desc = "Toggle Line Number" })
+map("n", "<leader>ur", "<cmd>set rnu!<CR>", { desc = "Toggle Relative Number" })
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+map(
+  "n",
+  "<leader>ur",
+  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+  { desc = "Redraw / Clear hlsearch / Diff Update" }
+)
+map("n", "<leader>ut", function()
+  require("nvchad.themes").open()
+end, { desc = "telescope nvchad themes" })
 
+-- Add undo break-points
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+
+-- commenting
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
+-- Git
+map("n", "<leader>g", "", { desc = "Git" })
+map("n", "<leader>gm", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
+map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "Git Status" })
+-- map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+-- map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+-- map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
+-- map("n", "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
+-- map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
+-- map("n", "<leader>gl", function() Snacks.lazygit.log({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit Log" })
+-- map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
+
+-- Telescope
+map("n", "<leader>f", "Telescope", { desc = "Find (Telescope)" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>", { desc = "Telescope Find All Files" })
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find Text" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Telescope Help Page" })
+map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "Find Marks" })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Find Recent Files" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Find Text (Current Buffer)" })
+map("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Telescope Find Commands" })
+
+-- highlights under cursor
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
+
+-- windows
+map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+
+-- Help
+map("n", "<leader>h", "", { desc = "Help" })
+map("n", "<leader>hc", "<cmd>Telescope commands<cr>", { desc = "Find Commands" })
+map("n", "<leader>hk", "<cmd>Telescope keymaps<cr>", { desc = "Find Keymaps" })
+map("n", "<leader>ht", "<cmd>Telescope help_tags<CR>", { desc = "Telescope Help Page" })
+map("n", "<leader>hc", "<cmd>NvCheatsheet<CR>", { desc = "Toggle Nvcheatsheet" })
+map("n", "<leader>hwK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
+map("n", "<leader>hwk", function()
+  vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
+end, { desc = "whichkey query lookup" })
+
+-- Terminal
+map("n", "<leader>t", "", { desc = "Terminal" })
+map("n", "<leader>tt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
+map("n", "<leader>th", function() require("nvchad.term").new { pos = "sp" } end, { desc = "Terminal New Horizontal Term" })
+map("n", "<leader>tv", function() require("nvchad.term").new { pos = "vsp" } end, { desc = "Terminal New Vertical Term" })
+-- map({ "n", "t" }, "<A-v>", function() require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" } end, { desc = "terminal toggleable vertical term" })
+map({ "n", "t" }, "<C-`>", function() require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" } end, { desc = "terminal toggleable horizontal term" })
+map({ "n", "t" }, "<C-/>", function() require("nvchad.term").toggle { pos = "float", id = "floatTerm" } end, { desc = "terminal toggle floating term" })
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- map("n", "<Leader>ft", "", { expr = true, desc = "" })
+map("n", "<leader>=", function()
+  require("conform").format { lsp_fallback = true }
+end, { desc = "Format File" })
 
--- map({ "i", "s" }, "<C-E>", function()
---   if require("luasnip").choice_active() then
---     require("luasnip").change_choice(1)
---   end
--- end, { silent = true })
+-- Buffers
+map("n", "<tab>", function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
+map("n", "<S-tab>", function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
+map("n", "<S-l>", function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
+map("n", "<S-h>", function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
+map("n", "<leader>`", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
+map("n", "<Leader>b", "", { desc = "Buffer" })
+map("n", "<leader>bl", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
+map("n", "<Leader>bd", function () require("nvchad.tabufline").close_buffer() end, { desc = "Buffer Close" })
+map("n", "<leader>bf", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
+map("n", "<leader>,", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
+
+-- Code action
+map("n", "<Leader>c", "", { desc = "CodeAction/CodeLens" })
+
+-- Debug
+map("n", "<Leader>d", "", { desc = "Debug" })
+
+-- Session
+map("n", "<Leader>q", "", { desc = "Session" })
+
+-- NvimTree
+map("n", "<Leader>e", function () require("nvim-tree.api").tree.open() end, { desc = "NvimTree Windows" })
+map("n", "<C-n>", function () require("nvim-tree.api").tree.toggle() end, { desc = "Nvimtree Toggle" })
+
+
+-- Lazy.nvim
+-- map("n", "<Leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
 
 -- Better indenting
 map("v", ">", ">gv")
 map("v", "<", "<gv")
+map("v", "y", "ygv<ESC>") -- 复制后光标保持在原来的位置
 
--- 复制后光标保持在原来的位置
-map("v", "y", "ygv<ESC>")
 
-map("n", "<leader>`", "<cmd>e#<cr>", { desc = "🔙 Last Buffer" })
--- map("n", "<leader>b1", "<cmd>bfirst<cr>", { desc = "First buffer" })
--- map("n", "<leader>bn", function()
---   require("nvchad.tabufline").next()
--- end, { desc = "Next buffer" })
--- map("n", "<leader>bp", function()
---   require("nvchad.tabufline").prev()
--- end, { desc = "Previous buffer" })
--- map("n", "<leader>bd", function()
---   -- require("nvchad.tabufline").
--- end, { desc = "Close current buffer" })
--- map("n", "<leader>bD", "<cmd>%bd|e#<cr>", { desc = "Close other buffers" })
-
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- map("n", "\\t", function ()
 --   vim.ui.select({'apple', 'banana', 'mango'}, {
 --   prompt = "Title",

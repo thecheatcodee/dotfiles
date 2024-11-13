@@ -2,6 +2,9 @@
 -- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
 -- Please read that file to know all available options :(
 
+
+-- :h nvui
+
 ---@type ChadrcConfig
 local M = {}
 
@@ -13,17 +16,23 @@ M.base46 = {
     ["@comment"] = { italic = true },
 
   },
+  integrations = { "dap", "hop" },
+  transparency = false,
+
+}
+
+M.ui = {
 }
 
 M.nvdash = {
     load_on_startup = true,
     buttons = {
-      { txt = "  Find File", keys = "ff", cmd = "Telescope find_files" },
-      { txt = "  Recent Files", keys = "fo", cmd = "Telescope oldfiles" },
-      { txt = "󰈭  Find Word", keys = "fw", cmd = "Telescope live_grep" },
-      { txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
-      { txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
-      { txt = "  Restore Session", keys = "qs", cmd = "lua require('persistence').load { last = true }" },
+      { txt = "  Find File", keys = "f", cmd = "Telescope find_files" },
+      { txt = "  Recent Files", keys = "o", cmd = "Telescope oldfiles" },
+      { txt = "󰈭  Find Word", keys = "w", cmd = "Telescope live_grep" },
+      { txt = "󱥚  Themes", keys = "t", cmd = ":lua require('nvchad.themes').open()" },
+      { txt = "  Mappings", keys = "m", cmd = "NvCheatsheet" },
+      { txt = "  Restore Session", keys = "s", cmd = "SessionLoadLast" },
 
       { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
 

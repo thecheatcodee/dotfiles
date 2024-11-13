@@ -63,16 +63,29 @@ My Neovim config
 
 ## ✅ Todo
 
+- [ ] 添加Markdown局部快捷键（render，preview，生成语法等）
 - [ ] 完善插件lazyload配置
-- [ ] 优化按键映射，使用Lazyvim风格
+- [x] 优化按键映射，使用Lazyvim风格
 - [ ] 更详尽的 LSP 配置
-- [ ] Debug 功能
+- [x] Debug 功能
 - [ ] 更多 UI 优化
 - [ ] 集成 Copilot
-- [ ] 命令行补全替换成nvim-cmp
+- [ ] ~~命令行补全替换成nvim-cmp~~
 - [ ] Jupyter 支持
-- [ ] rest client
-- [ ] 默认打开dashboard
+- [ ] 优化Avante配置
+- [ ] 添加更多git功能
+- [ ] 添加数据库功能
+- [ ] 配置Neotest
+- [ ] 为常用语言配置Debug
+- [x] 默认打开dashboard
+- [ ] 完善Which key配置
+  - [ ] Icon
+  - [ ] 启动时的延迟问题
+- [ ] Nvcheatsheet
+- [ ] Latex
+- [ ] 尝试yanky
+- [ ] Obsidian支持
+- [ ] 图片支持
 
 ## 🐞FIXME
 
@@ -80,5 +93,5 @@ My Neovim config
 - [x] markdown-render 的标题不能正确渲染
 - [x] http treesitter 高亮不工作
 - [ ] kulala创建response结果窗口后，如果想关闭它，会导致bufline的错误
-- [ ] 有未保存的buffer时，自动关闭nvim-tree的autocmd会报错
+- [x] 有未保存的buffer时，自动关闭nvim-tree的autocmd会报错
 - [ ] neovim刚进入时如果lazy.nvim自动打开安装插件的窗口，会报错

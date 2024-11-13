@@ -26,7 +26,6 @@ if vim.fn.has("mac") and vim.env.SSH_CONNECTION == nil then
   })
 end
 
-
 -- FIXME: 有时不起作用，怀疑是事件顺序问题
 autocmd("BufEnter", {
   callback = function()
@@ -44,65 +43,32 @@ autocmd("FileType", {
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
-    vim.opt_local.spell = false
-    -- vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
+    -- vim.opt_local.spell = false
+    vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
   end,
 })
 
 
 
--- FIXME: 启动nvim时如果没有buffer，使用telescope跳转文件时会导致nvim直接退出
--- autocmd("BufEnter", {
---   nested = true,
---   callback = function()
---     if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
---       -- FIXME: 当存在隐藏的未保存的buffer时会报错
---       -- vim.cmd "silent quitall"
---
---       vim.cmd "silent xall"
---     end
---   end,
---   -- group = general,
---   desc = "Close nvim if NvimTree is only running buffer",
--- })
-
--- local function is_modified_buffer_open(buffers)
---     for _, v in pairs(buffers) do
---         if v.name:match("NvimTree_") == nil then
---             return true
---         end
---     end
---     return false
--- end
-
--- autocmd("BufEnter", {
---     nested = true,
---     callback = function()
---         if
---             #vim.api.nvim_list_wins() == 1
---             and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil
---             -- and is_modified_buffer_open(vim.fn.getbufinfo({ bufmodified = 1 })) == false
---         then
---           -- print("flag")
---             vim.cmd("quit")
---         end
---     end
--- })
-
-
-
 autocmd("QuitPre", {
-    callback = function()
-        if #vim.api.nvim_list_wins() <= 2 then
-          for _, win in pairs(vim.api.nvim_list_wins()) do
-            local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win))
-            if bufname:match("NvimTree_") ~= nil then
-              require("nvim-tree.api").tree.close()
-            end
-          end
-        end
+  callback = function()
+    local has_tree = false
+    local n_win = 0
+    for _, win in pairs(vim.api.nvim_list_wins()) do
+      local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win))
+      -- for noice.nvim
+      if bufname == nil or bufname == "" then goto continue end
+      if bufname:match("NvimTree_") ~= nil then
+        has_tree = true
+      end
+      n_win = n_win + 1
+      ::continue::
     end
+    if n_win <= 2 and has_tree then require("nvim-tree.api").tree.close() end
+  end
 })
+
+
 
 --[[
 

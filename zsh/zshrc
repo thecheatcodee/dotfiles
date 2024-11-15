@@ -113,12 +113,13 @@ export EDITOR=nvim
 
 # Alias
 alias man='tldr'
-# alias vim='nvim '
+alias vim='nvim '
 alias ls='eza --color=always --git --icons=always --no-user'
 alias cat='bat '
 alias y='yazi '
 alias py='python '
 alias nvd='neovide --frame buttonless --title-hidden'
+alias top='btop'
 alias e='$EDITOR'
 alias sudo='sudo -E '
 alias ze='zellij attach'

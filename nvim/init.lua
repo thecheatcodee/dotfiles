@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 -- load plugins
+
 require("lazy").setup({
   {
     "NvChad/NvChad",
@@ -28,7 +29,6 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-require "nvchad.autocmds"
 require "autocmds"
 require "options"
 

@@ -2,6 +2,8 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+require "nvchad.autocmds"
+
 local autocmd = vim.api.nvim_create_autocmd
 -- local augroup = vim.api.nvim_create_augroup
 
@@ -14,7 +16,7 @@ if vim.fn.has("mac") and vim.env.SSH_CONNECTION == nil then
   if not vim.fn.executable(imselect_bin) then
     return
   end
-  vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained" }, {
+  autocmd({ "InsertLeave", "FocusGained" }, {
     pattern = "*",
     callback = function()
       -- 只有在需要时才切换
@@ -35,8 +37,6 @@ autocmd("BufEnter", {
   desc = "Prevent auto comment new line",
 })
 
-
-
 -- wrap and check for spell in text filetypes
 autocmd("FileType", {
   -- group = augroup("wrap_spell"),
@@ -45,11 +45,13 @@ autocmd("FileType", {
     vim.opt_local.wrap = true
     -- vim.opt_local.spell = false
     vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
+    vim.opt_local.whichwrap = "[]<>hl,b,s" -- allow automatically go to next line
+
   end,
 })
 
 
-
+-- 退出时自动关闭nvimtree
 autocmd("QuitPre", {
   callback = function()
     local has_tree = false
@@ -69,20 +71,6 @@ autocmd("QuitPre", {
 })
 
 
-
---[[
-
-          for _, v in vim.fn.getbufinfo({ bufmodified = 1 }) do
-            print(v.name)
-          end
-          for _, win in pairs(vim.api.nvim_list_wins()) do
-            print(vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win)))
-          end
-
-          for i, v in pairs(vim.fn.getbufinfo({ bufmodified = 1 })) do print(i .. ": " .. v.name) end
---]]
-
-
 -- Highlight on yank
 autocmd("TextYankPost", {
   -- group = augroup("highlight_yank"),
@@ -93,18 +81,18 @@ autocmd("TextYankPost", {
 
 -- prevent weird snippet jumping behavior
 -- https://github.com/L3MON4D3/LuaSnip/issues/258
-autocmd({ "ModeChanged" }, {
-  pattern = { "s:n", "i:*" },
-  callback = function()
-    if
-      require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-      and not require("luasnip").session.jump_active
-    then
-      require("luasnip").unlink_current()
-    end
-  end,
-})
-
+-- nvchad 自带了
+-- autocmd({ "ModeChanged" }, {
+--   pattern = { "s:n", "i:*" },
+--   callback = function()
+--     if
+--       require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+--       and not require("luasnip").session.jump_active
+--     then
+--       require("luasnip").unlink_current()
+--     end
+--   end,
+-- })
 
 -- Delete [No Name] buffers,
 autocmd("BufHidden", {
@@ -117,10 +105,13 @@ autocmd("BufHidden", {
   end,
 })
 
--- -- Hide cursorline in insert mode
--- autocmd({ "InsertLeave", "WinEnter" }, {
---   command = "set cursorline",
--- })
+-- Hide cursorline in insert mode
+autocmd({ "InsertLeave" }, {
+  command = "set cursorline",
+})
+autocmd({ "InsertEnter" }, {
+  command = "set nocursorline",
+})
 
 -- Automatically update changed file in Vim
 -- Triger `autoread` when files changes on disk
@@ -132,9 +123,9 @@ autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
 
 -- Notification after file change
 -- https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
-autocmd("FileChangedShellPost", {
-  command = [[echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None]],
-})
+-- autocmd("FileChangedShellPost", {
+--   command = [[echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None]],
+-- })
 
 
 -- 设置工作目录
@@ -142,7 +133,9 @@ autocmd("VimEnter", {
   callback = function()
     local arg = vim.fn.argv(0)  -- 获取第一个参数
     local isdirectory
+
     if arg and arg ~= "" then
+--       local dir = vim.fn.expand(vim.fn.argv(0))
       isdirectory = vim.fn.isdirectory(arg) == 1
 ---@diagnostic disable-next-line: param-type-mismatch
       -- isfile = vim.fn.filereadable(arg) == 1
@@ -164,15 +157,6 @@ autocmd("VimEnter", {
     end
   end,
 })
-
--- autocmd({"BufEnter", "BufRead"} , {
---   callback = function(args)
---     local file = args.file
---     if vim.fn.isdirectory(file) == 1 then
---       vim.cmd("bdelete") -- 删除缓冲区
---     end
---   end,
--- })
 
 -- 识别http
 autocmd({"BufRead","BufNewFile"}, {
@@ -254,3 +238,33 @@ autocmd("BufReadPost", {
 })
 
 
+
+-- FIXME: 没有用或者可能冲突了
+
+-- Somewhere in your config
+-- local persisted = require("persisted")
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   nested = true,
+--   callback = function()
+--     if vim.g.started_with_stdin then
+--       return
+--     end
+--
+--     local forceload = false
+--     if vim.fn.argc() == 0 then
+--       forceload = true
+--     elseif vim.fn.argc() == 1 then
+-- ---@diagnostic disable-next-line: param-type-mismatch
+--       local dir = vim.fn.expand(vim.fn.argv(0))
+--       if dir == '.' then
+--         dir = vim.fn.getcwd()
+--       end
+--
+--       if vim.fn.isdirectory(dir) ~= 0 then
+--         forceload = true
+--       end
+--     end
+--
+--     persisted.autoload({ force = forceload })
+--   end,
+-- })

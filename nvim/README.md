@@ -17,20 +17,23 @@ My Neovim config
 - [mgastonportillo/nvchad-config](https://github.com/mgastonportillo/nvchad-config/blob/main/lua/)
 - [kiyoon/dotfiles](https://github.com/kiyoon/dotfiles/tree/master/nvim)
 - [nvchad](https://github.com/NvChad/NvChad)
-- Reddit社区
-- Stackoverflow
+- [Reddit社区](https://www.reddit.com/r/neovim/)
+- Stackoverflow 
+- [dotfyle](https://dotfyle.com/) 
 
 ## 目录结构
 
 ```text
 
 
+
+
 ```
 
 ## 平台支持
 
-- Neovide
-- WSL环境
+- [x] Neovide
+- [ ] WSL环境
 
 ## 插件列表
 
@@ -63,29 +66,66 @@ My Neovim config
 
 ## ✅ Todo
 
+- [ ] 使用commander并把一些小工具放在那里
+- [ ] 调整nvim-tree快捷键
+- [ ] telescope 批量删除buffers
+- [ ] 优化luasnip（友好的node可视化、模式切换后的jumpnode保留）
+- [ ] macro插件
+- [ ] 优化markdown heading bg高亮（在有些深色主题中太亮了）
+- [ ] 宏插件
+- [ ] 尝试zen mode插件（忘记名字了）
+- [x] 代码fold插件
 - [ ] 添加Markdown局部快捷键（render，preview，生成语法等）
-- [ ] 完善插件lazyload配置
+- [x] 完善插件lazyload配置
 - [x] 优化按键映射，使用Lazyvim风格
 - [ ] 更详尽的 LSP 配置
+  - [x] go
+  - [x] python
+  - [ ] js/ts
+  - [ ] c/cpp
+  - [ ] bash
+  - [ ] SQL
 - [x] Debug 功能
-- [ ] 更多 UI 优化
+- [x] 更多 UI 优化
 - [ ] 集成 Copilot
 - [ ] ~~命令行补全替换成nvim-cmp~~
 - [ ] Jupyter 支持
 - [ ] 优化Avante配置
-- [ ] 添加更多git功能
+- [ ] 添加更多git功能 (nvim/lua/plugins/init.lua中注释部分)
+  - [ ] neogit
+  - [ ] git-conflict.nvim
+  - [ ] diffview.nvim
 - [ ] 添加数据库功能
 - [ ] 配置Neotest
 - [ ] 为常用语言配置Debug
+  - [x] go
+  - [ ] python
+  - [ ] js/ts
+  - [ ] c/cpp
+  - [ ] bash
 - [x] 默认打开dashboard
-- [ ] 完善Which key配置
-  - [ ] Icon
-  - [ ] 启动时的延迟问题
+- [x] 完善Which key配置
+  - [x] 完善Icon
+  - [x] 启动时的延迟问题
+  - [x] 分组
 - [ ] Nvcheatsheet
-- [ ] Latex
+- [ ] Latex snippets
 - [ ] 尝试yanky
 - [ ] Obsidian支持
 - [ ] 图片支持
+- [ ] 更好的menu（Hover、CodeAction等）
+- [ ] 快捷键或Snippet添加TODO
+- [ ] 添加一些自己常用的snippets
+- [ ] 添加查看noice 消息的功能
+- [ ] 添加部分格式化功能
+- [x] 修复Flash高亮
+- [ ] 插件分类
+- [x] 为noice添加更多routes
+- [ ] 分离核心组件和额外的模块
+- [ ] 使用自动配置lsp的插件
+
+
+
 
 ## 🐞FIXME
 
@@ -95,3 +135,8 @@ My Neovim config
 - [ ] kulala创建response结果窗口后，如果想关闭它，会导致bufline的错误
 - [x] 有未保存的buffer时，自动关闭nvim-tree的autocmd会报错
 - [ ] neovim刚进入时如果lazy.nvim自动打开安装插件的窗口，会报错
+- [ ] cmp补全时的文档不会被渲染，可能是filetype原因
+
+
+## 插件
+- [How to write neovim plugins in Lua](https://www.2n.pl/blog/how-to-write-neovim-plugins-in-lua) 

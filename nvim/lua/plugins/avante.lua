@@ -1,10 +1,21 @@
+-- NOTE: 默认的按键绑定中 "<leader>af" 也就是 AvanteFocus 命令
+-- 需要先使用 “<leader>aa” 也就是 AvanteAsk 后才能使用，不然会报错
+-- 可能是因为执行 AvanteAsk 后插件才正式激活
+-- NOTE: 输入框输入/help
+
 return {
   "yetone/avante.nvim",
 
   enabled = true,
 
-  -- event = "VeryLazy",
-  lazy = false,
+
+  -- Default
+  -- -- event = "VeryLazy",
+  -- lazy = false,
+
+  event = "VeryLazy",
+
+
   version = false, -- set this if you want to always pull the latest change
 
   opts = {

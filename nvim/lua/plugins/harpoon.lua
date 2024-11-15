@@ -4,7 +4,7 @@ return {
 	{
 		'ThePrimeagen/harpoon',
 		branch = 'harpoon2',
-    enabled = false,
+    enabled = false, -- 多了一套逻辑，用marks插件足够了
 
 		opts = {
 			menu = {

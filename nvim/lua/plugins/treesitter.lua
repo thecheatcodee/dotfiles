@@ -41,6 +41,8 @@ return {
       "query",
       "printf",
       "luap",
+
+      "zig",
     },
     auto_install = true,
     indent = { enable = true },

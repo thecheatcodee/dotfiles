@@ -9,7 +9,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "ayu_dark",
+  theme = "chadracula-evondev",
 
   hl_override = {
     Comment = { italic = true },
@@ -31,8 +31,11 @@ M.nvdash = {
       { txt = "  Recent Files", keys = "o", cmd = "Telescope oldfiles" },
       { txt = "󰈭  Find Word", keys = "w", cmd = "Telescope live_grep" },
       { txt = "󱥚  Themes", keys = "t", cmd = ":lua require('nvchad.themes').open()" },
-      { txt = "  Mappings", keys = "m", cmd = "NvCheatsheet" },
-      { txt = "  Restore Session", keys = "s", cmd = "SessionLoadLast" },
+      -- { txt = "  Projects", keys = "p", cmd = "lua require('telescope').extensions.projects.projects{}" },
+      -- { txt = "  Mappings", keys = "m", cmd = "NvCheatsheet" },
+      { txt = "  Restore Session", keys = "l", cmd = "SessionLoadLast" },
+      { txt = "  Recent Sessions", keys = "s", cmd = "SessionSelect" },
+      { txt = "  Quit", keys = "q", cmd = "quit" },
 
       { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
 

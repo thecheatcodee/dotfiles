@@ -1,14 +1,11 @@
 
 
--- TODO: 添加一个lock文件来防止重复执行
+-- TODO: kitty_window_id没用
 
 
 
 -- https://gist.github.com/galaxia4Eva/9e91c4f275554b4bd844b6feece16b3d
 return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN, kitty_window_id)
-
-
-
   -- local kitty_window_id = vim.loop.os_getenv("KITTY_WINDOW_ID")
 
   -- local kitty_window_id = vim.loop.os_getenv("KITTY_PID")
@@ -53,11 +50,23 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN, kitty_window_id)
   local term_buf = vim.api.nvim_create_buf(true, false);
   local term_io = vim.api.nvim_open_term(term_buf, {})
   vim.api.nvim_buf_set_keymap(term_buf, 'n', 'q', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 'q', '<Cmd>q<CR>', { })
   vim.api.nvim_buf_set_keymap(term_buf, 'n', '<ESC>', '<Cmd>q<CR>', { })
   vim.api.nvim_buf_set_keymap(term_buf, 'n', 'i', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 'i', '<Cmd>q<CR>', { })
   vim.api.nvim_buf_set_keymap(term_buf, 'n', 'I', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 'I', '<Cmd>q<CR>', { })
   vim.api.nvim_buf_set_keymap(term_buf, 'n', 'a', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 'a', '<Cmd>q<CR>', { })
   vim.api.nvim_buf_set_keymap(term_buf, 'n', 'A', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 'A', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'n', 's', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 's', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'n', 'S', '<Cmd>q<CR>', { })
+  vim.api.nvim_buf_set_keymap(term_buf, 'x', 'S', '<Cmd>q<CR>', { })
+  -- 交换 / 和 ?
+  vim.api.nvim_set_keymap('n', '/', '?', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '?', '/', { noremap = true, silent = true })
   local group = vim.api.nvim_create_augroup('kitty+page', {})
 
   local setCursor = function()

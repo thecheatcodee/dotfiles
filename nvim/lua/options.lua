@@ -5,6 +5,7 @@ require "nvchad.options"
 vim.g.dap_virtual_text = true
 vim.g.bookmark_sign = ""
 vim.g.skip_ts_context_commentstring_module = true
+vim.g.have_nerd_font = true
 
 
 vim.opt.encoding = "utf-8"
@@ -66,8 +67,9 @@ vim.opt.wrap = false
 vim.opt.linebreak = true
 vim.opt.textwidth = 0
 vim.opt.wrapmargin = 0
--- whichwrap = vim.opt.whichwrap
--- whichwrap = {"[", "]", "<", ">"} -- 光标行尾时可以跳到下一行的按键
+-- vim.opt.whichwrap:remove {"h", "l"}
+-- vim.opt.whichwrap = "[]<>hl,b,s" -- 光标行尾时可以移动到下一行的按键
+vim.opt.whichwrap = "" -- 这里取消掉nvchad默认的配置
 
 -- Undo
 vim.opt.undofile = true
@@ -95,5 +97,8 @@ if vim.fn.has("nvim-0.10") == 1 then
 else
   vim.opt.foldmethod = "indent"
 end
+
+-- Prevent auto comment new line
+vim.opt.formatoptions:remove { "c", "r", "o" }
 
 

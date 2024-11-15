@@ -7,22 +7,29 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 ---@param config {type?:string, args?:string[]|fun():string[]?}
-local function get_args(config)
-  local args = type(config.args) == "function" and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
-  local args_str = type(args) == "table" and table.concat(args, " ") or args --[[@as string]]
+-- local function get_args(config)
+--   local args = type(config.args) == "function" and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
+--   local args_str = type(args) == "table" and table.concat(args, " ") or args --[[@as string]]
+--
+--   config = vim.deepcopy(config)
+--   ---@cast args string[]
+--   config.args = function()
+--     local new_args = vim.fn.expand(vim.fn.input("Run with args: ", args_str)) --[[@as string]]
+--     if config.type and config.type == "java" then
+--       ---@diagnostic disable-next-line: return-type-mismatch
+--       return new_args
+--     end
+--     return require("dap.utils").splitstr(new_args)
+--   end
+--   return config
+-- end
 
-  config = vim.deepcopy(config)
-  ---@cast args string[]
-  config.args = function()
-    local new_args = vim.fn.expand(vim.fn.input("Run with args: ", args_str)) --[[@as string]]
-    if config.type and config.type == "java" then
-      ---@diagnostic disable-next-line: return-type-mismatch
-      return new_args
-    end
-    return require("dap.utils").splitstr(new_args)
-  end
-  return config
-end
+-- TODO: 暂时放着
+-- local has_dap_virtual_text, dap_virtual_text = pcall(require, "nvim-dap-virtual-text")
+-- if not has_dap_virtual_text then
+--   return {}
+-- end
+
 
 return {
 
@@ -42,53 +49,28 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
 
-    opts = {},   {
-     "theHamsta/nvim-dap-virtual-text",
-    }
+   "theHamsta/nvim-dap-virtual-text",
   },
 
   keys = {
-      { '<F5>', function() require('dap').continue() end, desc = 'Debug Start/Continue' },
-      { '<F1>', function() require('dap').step_into() end, desc = 'Debug Step Into' },
-      { '<F2>', function() require('dap').step_over() end, desc = 'Debug Step Over'},
-      { '<F3>', function() require('dap').step_out() end, desc = 'Debug Step Out', },
-      { '<F7>', function() require('dapui').toggle() end, desc = 'Debug See last session result.' },
-      { '<leader>du', function() require('dapui').toggle() end, desc = 'Debug UI' },
-      { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Debug Toggle Breakpoint', },
-      { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = 'Debug Set Breakpoint', },
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Debug UI Widgets" },
-    },
-  -- keys = function(_, keys)
-  --   local dap = require 'dap'
-  --   local dapui = require 'dapui'
-  --   return {
-  --     -- Basic debugging keymaps, feel free to change to your liking!
-  --     { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-  --     { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-  --     { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-  --     { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-  --     { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
-  --     {
-  --       '<leader>B',
-  --       function()
-  --         dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-  --       end,
-  --       desc = 'Debug: Set Breakpoint',
-  --     },
-  --     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-  --     { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
-  --     unpack(keys),
-  --
-  --
-  --   }
-  -- end,
+    { '<F5>', function() require('dap').continue() end, desc = 'Debug Start/Continue' },
+    { "<leader>dc", function() require("dap").continue() end, desc = "Run/Continue" },
+    { '<F1>', function() require('dap').step_into() end, desc = 'Debug Step Into' },
+    { '<F2>', function() require('dap').step_over() end, desc = 'Debug Step Over'},
+    { '<F3>', function() require('dap').step_out() end, desc = 'Debug Step Out', },
+    { '<F7>', function() require('dapui').toggle() end, desc = 'Debug See last session result.' },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { '<leader>du', function() require('dapui').toggle() end, desc = 'Debug UI' },
+    { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Debug Toggle Breakpoint', },
+    { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = 'Debug Set Breakpoint', },
+    -- { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Debug UI Widgets" },
+  },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
 
+
     require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
       automatic_installation = true,
 
       -- You can provide additional configuration to the handlers,
@@ -103,6 +85,8 @@ return {
       },
     }
 
+    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
@@ -112,15 +96,15 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
+          pause      = ' ',
+          play       = ' ',
+          step_into  = ' ',
+          step_over  = ' ',
+          step_out   = ' ',
+          step_back  = ' ',
+          run_last   = ' ',
+          terminate  = ' ',
+          disconnect = ' ',
         },
       },
     }
@@ -137,9 +121,30 @@ return {
       vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
     end
 
+    local dap_virtual_text = require("nvim-dap-virtual-text")
+
+    dap.listeners.after.disconnect["dapui_config"] = function()
+      require("dap.repl").close()
+      dapui.close()
+      dap_virtual_text.refresh()
+    end
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    dap.listeners.before.event_initialized["dapui_config"] = function()
+      local api = require "nvim-tree.api"
+      local view = require "nvim-tree.view"
+      if view.is_visible() then
+        api.tree.close()
+      end
+
+      for _, winnr in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        local bufnr = vim.api.nvim_win_get_buf(winnr)
+        if vim.api.nvim_get_option_value("ft", { buf = bufnr }) == "dap-repl" then
+          return
+        end
+      end
+      -- dapui:open()
+    end
 
     -- Install golang specific config
     require('dap-go').setup {

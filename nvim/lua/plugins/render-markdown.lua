@@ -9,7 +9,6 @@ return {
   -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
   ---@module 'render-markdown'
-  ---\@type render.md.UserConfig
   -- opts = {},
   ft = { "markdown", "quarto", "Avante" },
   config = function()
@@ -32,27 +31,27 @@ return {
       },
 
       heading = {
-          width = 'block',
-          left_pad = 2,
-          right_pad = 4,
-          -- border = true,
-          -- border_virtual = true,
-          backgrounds = {
-              'MarkviewHeading1',
-              'MarkviewHeading2',
-              'MarkviewHeading3',
-              'MarkviewHeading4',
-              'MarkviewHeading5',
-              'MarkviewHeading6',
-          },
-          foregrounds = {
-              'MarkviewHeading1',
-              'MarkviewHeading2',
-              'MarkviewHeading3',
-              'MarkviewHeading4',
-              'MarkviewHeading5',
-              'MarkviewHeading6',
-          },
+        width = 'block',
+        left_pad = 2,
+        right_pad = 4,
+        -- border = true,
+        -- border_virtual = true,
+        backgrounds = {
+          'MarkviewHeading1',
+          'MarkviewHeading2',
+          'MarkviewHeading3',
+          'MarkviewHeading4',
+          'MarkviewHeading5',
+          'MarkviewHeading6',
+        },
+        foregrounds = {
+          'MarkviewHeading1',
+          'MarkviewHeading2',
+          'MarkviewHeading3',
+          'MarkviewHeading4',
+          'MarkviewHeading5',
+          'MarkviewHeading6',
+        },
       },
 
 
@@ -61,10 +60,10 @@ return {
       },
 
       code = {
-          width = 'block',
-          min_width = 45,
-          left_pad = 2,
-          language_pad = 2,
+        width = 'block',
+        min_width = 45,
+        left_pad = 2,
+        language_pad = 2,
       },
 
       bullet = { left_pad = 1 },

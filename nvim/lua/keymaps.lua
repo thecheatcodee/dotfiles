@@ -55,20 +55,23 @@ map("n", "<C-k>", "<C-w>k", { desc = "Switch Window Up" })
 
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear Highlights" })
 
-map("n", "<leader>u", "", { desc = "UI" })
-map("n", "<leader>un", "<cmd>set nu!<CR>", { desc = "Toggle Line Number" })
+-- map("n", "<leader>u", "", { desc = "UI" })
+-- map("n", "<leader>un", "<cmd>set nu!<CR>", { desc = "Toggle Line Number" })
 map("n", "<leader>ur", "<cmd>set rnu!<CR>", { desc = "Toggle Relative Number" })
--- Clear search, diff update and redraw
--- taken from runtime/lua/_editor.lua
-map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
+map("n", "<leader>uf", function ()
+    if vim.o.foldcolumn ~= "0" then vim.o.foldcolumn="0" else vim.o.foldcolumn="2" end
+end, { desc = "Toggle Folder Column" })
 map("n", "<leader>ut", function()
   require("nvchad.themes").open()
 end, { desc = "telescope nvchad themes" })
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+-- map(
+--   "n",
+--   "<leader>ur",
+--   "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+--   { desc = "Redraw / Clear hlsearch / Diff Update" }
+-- )
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -94,6 +97,7 @@ map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "Git Status" })
 -- Telescope
 map("n", "<leader>f", "Telescope", { desc = "Find (Telescope)" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+-- map("n", "<leader>fd", "", { desc = "Change cwd" })
 map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>", { desc = "Telescope Find All Files" })
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find Text" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
@@ -102,14 +106,20 @@ map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "Find Marks" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Find Recent Files" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Find Text (Current Buffer)" })
 map("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Telescope Find Commands" })
+map("n", "<leader>fm", "<cmd>Telescope marks<cr>", { desc = "Telescope Find Bookmarks" })
+map("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = "Find Notifications" })
 
+-- 还不知道有什么用
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
+-- map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
--- windows
+-- Windows
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+
+-- AI
+map("n", "<leader>a", "", { desc = "AI" })
 
 -- Help
 map("n", "<leader>h", "", { desc = "Help" })
@@ -130,23 +140,31 @@ map("n", "<leader>tv", function() require("nvchad.term").new { pos = "vsp" } end
 -- map({ "n", "t" }, "<A-v>", function() require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" } end, { desc = "terminal toggleable vertical term" })
 map({ "n", "t" }, "<C-`>", function() require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" } end, { desc = "terminal toggleable horizontal term" })
 map({ "n", "t" }, "<C-/>", function() require("nvchad.term").toggle { pos = "float", id = "floatTerm" } end, { desc = "terminal toggle floating term" })
-map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-map("n", "<leader>=", function()
+-- TODO: 排除filetype=lazygit
+-- map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+map("n", "<leader>=", "", { desc = "Format" })
+map("n", "<leader>==", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "Format File" })
 
+-- TODO: 排除filetype=Avante
+
 -- Buffers
+-- luaship中跳转时会误触
 map("n", "<tab>", function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
 map("n", "<S-tab>", function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
 map("n", "<S-l>", function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
 map("n", "<S-h>", function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
-map("n", "<leader>`", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
 map("n", "<Leader>b", "", { desc = "Buffer" })
 map("n", "<leader>bl", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
 map("n", "<Leader>bd", function () require("nvchad.tabufline").close_buffer() end, { desc = "Buffer Close" })
 map("n", "<leader>bf", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
-map("n", "<leader>,", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
+-- quick shortcut
+map("n", "<leader>`", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
+map("n", "<leader>'", require("nvchad.tabufline").close_buffer, { desc = "Close Buffer" })
+map("n", "<leader>;", "<cmd>Telescope buffers<CR>", { desc = "Switch Buffers" })
 
 -- Code action
 map("n", "<Leader>c", "", { desc = "CodeAction/CodeLens" })
@@ -161,9 +179,8 @@ map("n", "<Leader>q", "", { desc = "Session" })
 map("n", "<Leader>e", function () require("nvim-tree.api").tree.open() end, { desc = "NvimTree Windows" })
 map("n", "<C-n>", function () require("nvim-tree.api").tree.toggle() end, { desc = "Nvimtree Toggle" })
 
-
 -- Lazy.nvim
--- map("n", "<Leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
+map("n", "<Leader>L", "<cmd>Lazy<CR>", { desc = "Lazy" })
 
 -- Better indenting
 map("v", ">", ">gv")
@@ -192,3 +209,6 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 --   telescope = require("telescope.themes").get_cursor(),
 -- }, function(selected) end)
 -- end, { desc = "Test" })
+--
+--
+-- More advanced example that also highlights diagnostics:

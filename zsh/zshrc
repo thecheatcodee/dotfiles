@@ -105,6 +105,7 @@ export PATH="/opt/X11/bin:$PATH"
 export PATH="/Applications/Alacritty.app/Contents/MacOS/:$PATH"
 export PATH="/Users/zachlu/.bun/bin:$PATH"
 
+export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 
 # source "$HOME/.rye/env"
 . "$HOME/.cargo/env"
@@ -132,6 +133,7 @@ alias del='trash'
 alias rm='rm -i'
 alias repo_del="gh repo list | fzf | awk '{print $1}' | xargs gh repo delete "
 alias repo_rename="gh repo list | fzf | awk '{print \$1}' | read d && echo gh repo rename --repo \\\"\"\$d\"\\\" | read a && bash -c 'read -e -p \"new name: \" name && echo \"\$name\"'  | read e && echo \$a \\\"\$e\\\" | read b && echo \"change \\\"\$d\\\" to \\\"\$e\\\"?\" && bash -c 'read -e -p \"confirm [y|n]: \" c && echo \"\$c\"' | read c && if [[ \$c == 'y' ]]; then echo \$b; else echo 'canceled.'; fi"
+alias nvimconf="nvim ~/.config/nvim/"
 # alias ls='eza --color=always --long --git --icons=always --no-user'
 
 
@@ -218,3 +220,4 @@ eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+

@@ -44,7 +44,7 @@ autocmd("FileType", {
   callback = function()
     vim.opt_local.wrap = true
     -- vim.opt_local.spell = false
-    vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
+    -- vim.opt_local.linebreak = true  -- 为更好地换行，避免单词被截断
     vim.opt_local.whichwrap = "[]<>hl,b,s" -- allow automatically go to next line
 
   end,

@@ -9,7 +9,6 @@ local map = vim.keymap.set
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
-
 map("n", "<leader><leader>", "", { desc = "More Tools" })
 
 --- Buffer commands
@@ -196,7 +195,7 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+-- map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" }) -- 使用flash
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })

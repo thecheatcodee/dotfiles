@@ -25,6 +25,8 @@ return {
   -- When obsidian.nvim is loaded by your plugin manager, it will automatically set
   -- the workspace to the first workspace in the list whose `path` is a parent of the
   -- current markdown file being edited.
+
+
   workspaces = {
     {
       name = "personal",
@@ -275,7 +277,8 @@ return {
   -- Optional, configure additional syntax highlighting / extmarks.
   -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
   ui = {
-    enable = true,  -- set to false to disable all additional syntax features
+    -- enable = true,  -- set to false to disable all additional syntax features
+    enable = false,  -- use render-markdown instead
     update_debounce = 200,  -- update delay after a text change (in milliseconds)
     max_file_length = 5000,  -- disable UI features for files with more than this many lines
     -- Define how various check-boxes are displayed

@@ -44,9 +44,9 @@ return {
     -- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
 
     -- TODO: 和codelens codeaction noice整合
-    { "<leader>cD", mode = { "n" }, function() jump_diagnostic() end, desc = "Screen Diagnostic" },
+    { "<leader>cd", mode = { "n" }, function() jump_diagnostic() end, desc = "Screen Diagnostic" },
     -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 }

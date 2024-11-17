@@ -2,11 +2,15 @@ require "nvchad.options"
 
 -- add yours here!
 
+
+
 vim.g.dap_virtual_text = true
 vim.g.bookmark_sign = ""
 vim.g.skip_ts_context_commentstring_module = true
 vim.g.have_nerd_font = true
 
+
+vim.o.relativenumber = false
 
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
@@ -60,7 +64,6 @@ vim.opt.sidescrolloff = 15
 -- True color support
 vim.opt.termguicolors = true
 vim.opt.emoji = false
-vim.opt.relativenumber = true
 
 -- Line break/wrap behaviours
 vim.opt.wrap = false
@@ -69,7 +72,7 @@ vim.opt.textwidth = 0
 vim.opt.wrapmargin = 0
 -- vim.opt.whichwrap:remove {"h", "l"}
 -- vim.opt.whichwrap = "[]<>hl,b,s" -- 光标行尾时可以移动到下一行的按键
-vim.opt.whichwrap = "" -- 这里取消掉nvchad默认的配置
+vim.o.whichwrap = "" -- 这里取消掉nvchad默认的配置
 
 -- Undo
 vim.opt.undofile = true

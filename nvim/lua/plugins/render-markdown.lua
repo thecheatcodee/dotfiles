@@ -31,6 +31,7 @@ return {
       },
 
       heading = {
+        enabled = false,
         width = 'block',
         left_pad = 2,
         right_pad = 4,
@@ -60,6 +61,7 @@ return {
       },
 
       code = {
+        sign = false,
         width = 'block',
         min_width = 45,
         left_pad = 2,

@@ -66,6 +66,8 @@ My Neovim config
 
 ## ✅ Todo
 
+- [ ] tailwindcss支持
+- [ ] 可视化jumplist
 - [ ] 使用commander并把一些小工具放在那里
 - [ ] 调整nvim-tree快捷键
 - [ ] telescope 批量删除buffers
@@ -90,7 +92,7 @@ My Neovim config
 - [ ] 集成 Copilot
 - [ ] ~~命令行补全替换成nvim-cmp~~
 - [ ] Jupyter 支持
-- [ ] 优化Avante配置
+- [x] 优化Avante配置
 - [ ] 添加更多git功能 (nvim/lua/plugins/init.lua中注释部分)
   - [ ] neogit
   - [ ] git-conflict.nvim
@@ -111,8 +113,8 @@ My Neovim config
 - [ ] Nvcheatsheet
 - [ ] Latex snippets
 - [ ] 尝试yanky
-- [ ] Obsidian支持
-- [ ] 图片支持
+- [x] Obsidian支持
+- [x] 图片支持
 - [ ] 更好的menu（Hover、CodeAction等）
 - [ ] 快捷键或Snippet添加TODO
 - [ ] 添加一些自己常用的snippets

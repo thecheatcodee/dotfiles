@@ -2,7 +2,7 @@
 return {
   {
     "nvim-telescope/telescope-frecency.nvim",
-    enabled = true, -- 感觉没用
+    enabled = false, -- 感觉没用，而且导致退出Neovim时有延迟
     event = "VimEnter",
     config = function()
       require("telescope").load_extension "frecency"

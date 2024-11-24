@@ -125,3 +125,4 @@ brew install ffmpeg
 # mas install 1429033973 # runcat
 # mas install 1221250572 # xnip 
 # brew install --cask lookaway
+# brew install --cask nikitabobko/tap/aerospace

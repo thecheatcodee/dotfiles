@@ -25,16 +25,18 @@ create_symlink() {
 }
 
 # 使用函数创建符号链接
-create_symlink "$DOTFILES/neovide" "$HOME/.config/neovide/"
-create_symlink "$DOTFILES/ssh/config" "$HOME/.ssh/config"
-create_symlink "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
-create_symlink "$DOTFILES/btop" "$HOME/.config/btop"
-create_symlink "$DOTFILES/fd" "$HOME/.config/fd"
-create_symlink "$DOTFILES/fish" "$HOME/.config/fish"
-create_symlink "$DOTFILES/kitty" "$HOME/.config/kitty"
-create_symlink "$DOTFILES/nvim" "$HOME/.config/nvim"
+create_symlink "$DOTFILES/neovide"                "$HOME/.config/neovide/"
+create_symlink "$DOTFILES/ssh/config"             "$HOME/.ssh/config"
+create_symlink "$DOTFILES/zsh/zshrc"              "$HOME/.zshrc"
+create_symlink "$DOTFILES/btop"                   "$HOME/.config/btop"
+create_symlink "$DOTFILES/fd"                     "$HOME/.config/fd"
+create_symlink "$DOTFILES/fish"                   "$HOME/.config/fish"
+create_symlink "$DOTFILES/kitty"                  "$HOME/.config/kitty"
+create_symlink "$DOTFILES/nvim"                   "$HOME/.config/nvim"
 create_symlink "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml"
-create_symlink "$DOTFILES/yazi" "$HOME/.config/yazi"
-create_symlink "$DOTFILES/zellij" "$HOME/.config/zellij"
+create_symlink "$DOTFILES/yazi"                   "$HOME/.config/yazi"
+create_symlink "$DOTFILES/zellij"                 "$HOME/.config/zellij"
+create_symlink "$DOTFILES/skhd"                   "$HOME/.config/skhd"
+create_symlink "$DOTFILES/yabai"                  "$HOME/.config/yabai"
 
-sh $DOTFILES/iterm2/setup.sh
+# sh $DOTFILES/iterm2/setup.sh

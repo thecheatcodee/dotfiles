@@ -92746,7 +92746,7 @@ Copy Mode</string>
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>44.535438829787211</real>
+			<real>24.757461709251498</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -93088,7 +93088,7 @@ Copy Mode</string>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNF-Regular 14</string>
+			<string>JetBrainsMonoNF-Regular 14.5</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Open Password Manager Automatically</key>
@@ -93276,7 +93276,7 @@ Copy Mode</string>
 			<key>Use Underline Color (Light)</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>0.94999999999999996</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -94644,7 +94644,7 @@ Copy Mode</string>
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>TerminalMargin</key>
-	<integer>8</integer>
+	<integer>10</integer>
 	<key>TerminalVMargin</key>
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>

@@ -66,7 +66,8 @@ COMPLETION_WAITING_DOTS="true"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-system-clipboard)
+# plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-system-clipboard)
+plugins=(git zsh-syntax-highlighting zsh-system-clipboard)
 # plugins+=(zsh-vi-mode)
 
 
@@ -128,12 +129,13 @@ alias neofetch='fastfetch'
 alias grep='rg'
 alias find='fd'
 alias lg='lazygit'
-alias cd='z'
 alias del='trash'
 alias rm='rm -i'
 alias repo_del="gh repo list | fzf | awk '{print $1}' | xargs gh repo delete "
 alias repo_rename="gh repo list | fzf | awk '{print \$1}' | read d && echo gh repo rename --repo \\\"\"\$d\"\\\" | read a && bash -c 'read -e -p \"new name: \" name && echo \"\$name\"'  | read e && echo \$a \\\"\$e\\\" | read b && echo \"change \\\"\$d\\\" to \\\"\$e\\\"?\" && bash -c 'read -e -p \"confirm [y|n]: \" c && echo \"\$c\"' | read c && if [[ \$c == 'y' ]]; then echo \$b; else echo 'canceled.'; fi"
 alias nvimconf="nvim ~/.config/nvim/"
+alias ob='cd "/Users/zachlu/Library/Mobile Documents/iCloud~md~obsidian/Documents/MySecondBrain"'
+alias cd='z' # TODO: 需要确保能用
 # alias ls='eza --color=always --long --git --icons=always --no-user'
 
 
@@ -217,7 +219,7 @@ precmd_functions+=(_fix_cursor)
 
 # ========================= Init =================================
 eval "$(fzf --zsh)"
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 

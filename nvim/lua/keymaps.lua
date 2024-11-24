@@ -85,6 +85,8 @@ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Commen
 map("n", "<leader>g", "", { desc = "Git" })
 map("n", "<leader>gm", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
 map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "Git Status" })
+map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
+map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Current Line Blame" })
 -- map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 -- map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
 -- map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
@@ -132,7 +134,7 @@ map("n", "<leader>hwk", function()
 end, { desc = "whichkey query lookup" })
 
 -- Terminal
-map("n", "<leader>t", "", { desc = "Terminal" })
+map("n", "<leader>t",  "", { desc = "Terminal" })
 map("n", "<leader>tt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 map("n", "<leader>th", function() require("nvchad.term").new { pos = "sp" } end, { desc = "Terminal New Horizontal Term" })
 map("n", "<leader>tv", function() require("nvchad.term").new { pos = "vsp" } end, { desc = "Terminal New Vertical Term" })
@@ -141,7 +143,7 @@ map({ "n", "t" }, "<C-`>", function() require("nvchad.term").toggle { pos = "sp"
 map({ "n", "t" }, "<C-/>", function() require("nvchad.term").toggle { pos = "float", id = "floatTerm" } end, { desc = "terminal toggle floating term" })
 
 -- TODO: 排除filetype=lazygit
--- map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 map("n", "<leader>=", "", { desc = "Format" })
 map("n", "<leader>==", function()
@@ -152,34 +154,34 @@ end, { desc = "Format File" })
 
 -- Buffers
 -- luaship中跳转时会误触
-map("n", "<tab>", function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
-map("n", "<S-tab>", function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
-map("n", "<S-l>", function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
-map("n", "<S-h>", function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
-map("n", "<Leader>b", "", { desc = "Buffer" })
+map("n", "<tab>",      function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
+map("n", "<S-tab>",    function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
+map("n", "<S-l>",      function() require("nvchad.tabufline").next() end, { desc = "Buffer Goto Next" })
+map("n", "<S-h>",      function() require("nvchad.tabufline").prev() end, { desc = "Buffer Goto Prev" })
+map("n", "<Leader>b",  "", { desc = "Buffer" })
 map("n", "<leader>bl", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
 map("n", "<Leader>bd", function () require("nvchad.tabufline").close_buffer() end, { desc = "Buffer Close" })
 map("n", "<leader>bf", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
 -- quick shortcut
-map("n", "<leader>`", "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
-map("n", "<leader>'", require("nvchad.tabufline").close_buffer, { desc = "Close Buffer" })
-map("n", "<leader>;", "<cmd>Telescope buffers<CR>", { desc = "Switch Buffers" })
+map("n", "<leader>`",  "<cmd>e#<cr>", { desc = "Buffer Goto Last" })
+map("n", "<leader>'",  require("nvchad.tabufline").close_buffer, { desc = "Close Buffer" })
+map("n", "<leader>;",  "<cmd>Telescope buffers<CR>", { desc = "Switch Buffers" })
 
 -- Code action
-map("n", "<Leader>c", "", { desc = "CodeAction/CodeLens" })
+map("n", "<Leader>c",  "", { desc = "CodeAction/CodeLens" })
 
 -- Debug
-map("n", "<Leader>d", "", { desc = "Debug" })
+map("n", "<Leader>d",  "", { desc = "Debug" })
 
 -- Session
-map("n", "<Leader>q", "", { desc = "Session" })
+map("n", "<Leader>q",  "", { desc = "Session" })
 
 -- NvimTree
-map("n", "<Leader>e", function () require("nvim-tree.api").tree.open() end, { desc = "NvimTree Windows" })
-map("n", "<C-n>", function () require("nvim-tree.api").tree.toggle() end, { desc = "Nvimtree Toggle" })
+map("n", "<Leader>e",  function () require("nvim-tree.api").tree.open() end, { desc = "NvimTree Windows" })
+map("n", "<C-n>",      function () require("nvim-tree.api").tree.toggle() end, { desc = "Nvimtree Toggle" })
 
 -- Lazy.nvim
-map("n", "<Leader>L", "<cmd>Lazy<CR>", { desc = "Lazy" })
+map("n", "<Leader>L",  "<cmd>Lazy<CR>", { desc = "Lazy" })
 
 -- Better indenting
 map("v", ">", ">gv")

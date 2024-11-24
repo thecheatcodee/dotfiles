@@ -1,6 +1,6 @@
 -- Lazy
 return {
-  -- enabled = false,
+  enabled = true,
   "typicode/bg.nvim",
   lazy = false,
 }

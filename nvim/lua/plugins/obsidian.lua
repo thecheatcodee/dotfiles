@@ -1,17 +1,24 @@
+
+local function get_my_vault()
+  return "/Users/zachlu/Library/Mobile Documents/iCloud~md~obsidian/Documents/MySecondBrain/"
+end
+
 return {
   "epwalsh/obsidian.nvim",
   version = "*",  -- recommended, use latest release instead of latest commit
-  enabled = false, -- TODO: 等Obsidian整理完成
+  enabled = true, -- TODO: 等Obsidian整理完成
   lazy = true,
-  ft = "markdown",
+  -- ft = "markdown",
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-  --   -- refer to `:h file-pattern` for more examples
-  --   "BufReadPre path/to/my-vault/*.md",
-  --   "BufNewFile path/to/my-vault/*.md",
-  -- },
+  event = {
+    -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    -- refer to `:h file-pattern` for more examples
+    -- "BufReadPre path/to/my-vault/*.md",
+    -- "BufNewFile path/to/my-vault/*.md",
+    "BufReadPre " .. get_my_vault() .. "*.md",
+    "BufNewFile " .. get_my_vault() .. "*.md"
+  },
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
@@ -30,24 +37,29 @@ return {
   workspaces = {
     {
       name = "personal",
-      path = "~/vaults/personal",
+      path = get_my_vault(),
     },
-    {
-      name = "work",
-      path = "~/vaults/work",
-      -- Optional, override certain settings.
-      overrides = {
-        notes_subdir = "notes",
-      },
-    },
+    -- {
+    --   name = "personal",
+    --   path = "~/vaults/personal",
+    -- },
+    -- {
+    --   name = "work",
+    --   path = "~/vaults/work",
+    --   -- Optional, override certain settings.
+    --   overrides = {
+    --     notes_subdir = "notes",
+    --   },
+    -- },
   },
 
   -- Alternatively - and for backwards compatibility - you can set 'dir' to a single path instead of
   -- 'workspaces'. For example:
   -- dir = "~/vaults/work",
 
-  -- Optional, if you keep notes in a specific subdirectory of your vault.
-  notes_subdir = "notes",
+  -- optional, if you keep notes in a specific subdirectory of your vault.
+  -- notes_subdir = "notes",
+  notes_subdir = "Inbox",
 
   -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
   -- levels defined by "vim.log.levels.*".
@@ -55,13 +67,13 @@ return {
 
   daily_notes = {
     -- Optional, if you keep daily notes in a separate directory.
-    folder = "notes/dailies",
+    folder = "日记/",
     -- Optional, if you want to change the date format for the ID of daily notes.
     date_format = "%Y-%m-%d",
     -- Optional, if you want to change the date format of the default alias of daily notes.
-    alias_format = "%B %-d, %Y",
+    -- alias_format = "%B %-d, %Y",
     -- Optional, default tags to add to each new daily note created.
-    default_tags = { "daily-notes" },
+    -- default_tags = { "daily-notes" },
     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
     template = nil
   },
@@ -178,13 +190,13 @@ return {
   end,
 
   -- Optional, for templates (see below).
-  templates = {
-    folder = "templates",
-    date_format = "%Y-%m-%d",
-    time_format = "%H:%M",
-    -- A map for custom variables, the key should be the variable and the value a function
-    substitutions = {},
-  },
+  -- templates = {
+  --   folder = "templates",
+  --   date_format = "%Y-%m-%d",
+  --   time_format = "%H:%M",
+  --   -- A map for custom variables, the key should be the variable and the value a function
+  --   substitutions = {},
+  -- },
 
   -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
   -- URL it will be ignored but you can customize this behavior here.

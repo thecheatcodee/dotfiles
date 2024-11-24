@@ -54,7 +54,15 @@ return {
           'MarkviewHeading6',
         },
       },
-
+      bullet = {
+        enabled = true,
+        -- icons = { '●', '○', '◆', '◇' },
+        icons = { '', '', '', '' },
+        ordered_icons = {},
+        left_pad = 1,
+        right_pad = 0,
+        highlight = 'RenderMarkdownBullet',
+    },
 
       checkbox = {
         position = "overlay",
@@ -68,7 +76,6 @@ return {
         language_pad = 2,
       },
 
-      bullet = { left_pad = 1 },
     }
   end,
 }

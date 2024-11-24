@@ -12,7 +12,8 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Add autocmd for macOS to switch input method to ABC when entering normal mode
 if vim.fn.has("mac") and vim.env.SSH_CONNECTION == nil then
-  local imselect_bin = "/usr/local/bin/im-select"
+  -- local imselect_bin = "/usr/local/bin/im-select"
+  local imselect_bin = "im-select" -- "/opt/homebrew/bin/im-select"
   if not vim.fn.executable(imselect_bin) then
     return
   end

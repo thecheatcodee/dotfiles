@@ -48,12 +48,13 @@ local servers = {
   "cssls",
   "clangd",
   "basedpyright",
-  "bashls",
+  -- "bashls",
   -- "gopls",
+  "asm_lsp",
 
   "zls",
   -- "ruff",
-  -- "ts_ls",
+  "ts_ls",
   "jsonls",
   "dockerls",
   "kulala_ls",
@@ -80,6 +81,12 @@ end
 --   on_init = nvlsp.on_init,
 --   capabilities = nvlsp.capabilities,
 -- }
+
+-- Bash
+
+lspconfig.bashls.setup {
+  filetypes = { 'sh', 'zsh', },
+}
 
 -- Lua
 

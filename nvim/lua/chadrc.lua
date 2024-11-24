@@ -9,7 +9,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "rosepine",
+  theme = "catppuccin",
 
   hl_override = {
     Comment = { italic = true },
@@ -28,7 +28,7 @@ M.nvdash = {
     load_on_startup = true,
     buttons = {
       { txt = "  Find File", keys = "f", cmd = "Telescope find_files" },
-      { txt = "  Recent Files", keys = "o", cmd = "Telescope oldfiles" },
+      { txt = "  Recent Files", keys = "r", cmd = "Telescope oldfiles" },
       { txt = "󰈭  Find Word", keys = "w", cmd = "Telescope live_grep" },
       { txt = "󱥚  Themes", keys = "t", cmd = ":lua require('nvchad.themes').open()" },
       -- { txt = "  Projects", keys = "p", cmd = "lua require('telescope').extensions.projects.projects{}" },

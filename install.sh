@@ -37,7 +37,7 @@ brew install docker-compose
 
 # cool cli tools
 brew install imagemagick
-brew install zoxide
+brew install zoxide         # cd -> zoxide
 brew install neovim
 brew install eza            # ls -> eza
 brew install btop           # top -> btop 

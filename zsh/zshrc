@@ -135,7 +135,11 @@ alias repo_del="gh repo list | fzf | awk '{print $1}' | xargs gh repo delete "
 alias repo_rename="gh repo list | fzf | awk '{print \$1}' | read d && echo gh repo rename --repo \\\"\"\$d\"\\\" | read a && bash -c 'read -e -p \"new name: \" name && echo \"\$name\"'  | read e && echo \$a \\\"\$e\\\" | read b && echo \"change \\\"\$d\\\" to \\\"\$e\\\"?\" && bash -c 'read -e -p \"confirm [y|n]: \" c && echo \"\$c\"' | read c && if [[ \$c == 'y' ]]; then echo \$b; else echo 'canceled.'; fi"
 alias nvimconf="nvim ~/.config/nvim/"
 alias ob='cd "/Users/zachlu/Library/Mobile Documents/iCloud~md~obsidian/Documents/MySecondBrain"'
-alias cd='z' # TODO: 需要确保能用
+alias cd='z' # TODO: 先检测z命令是否有效 
+if [[ $TERM == "xterm-kitty" ]]; then
+  alias ssh="kitten ssh "
+fi
+
 # alias ls='eza --color=always --long --git --icons=always --no-user'
 
 

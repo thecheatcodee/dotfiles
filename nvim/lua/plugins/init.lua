@@ -25,7 +25,6 @@ return {
       wk.add({
         -- { "<leader>c", group = "[C]ode", icon = "" },
        -- { "<leader>c_", hidden = true },
-        -- 
         { "<leader>L",        name  = "Plugins (Lazy)",       icon = { icon = "󰒲 ",                    } },
         { "<leader>K",        name  = "Preview foled maps",   icon = { icon = " ",   color = "white"  } },
         { "<leader>e",        name  = "[E]xplorer",           icon = { icon = "󰥩 ",   color = "yellow" } },

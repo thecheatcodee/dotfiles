@@ -66,10 +66,15 @@ brew install hugo
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # zsh extensions
-git clone https://github.com/kutsan/zsh-system-clipboard ${ZSH_CUSTOM:-~/.zsh}/plugins/zsh-system-clipboard
-git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestion
+# TODO: zshrc中添加source
+brew install zsh-system-clipboard
+brew install zsh-vi-mode
+brew insatll zsh-autosuggestions
+brew install zsh-fast-syntax-highlighting
+# git clone https://github.com/kutsan/zsh-system-clipboard ${ZSH_CUSTOM:-~/.zsh}/plugins/zsh-system-clipboard
+# git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestion
 
 # 
 rustup-init
@@ -91,6 +96,7 @@ brew install mitmproxy
 brew install ffmpeg
 
 
+# Mac App
 # brew install --cask visual-studio-code
 # brew install --cask kitty
 # brew install --cask iterm2
@@ -121,8 +127,11 @@ brew install ffmpeg
 # brew install --cask tor-browser
 # brew install --cask moonlight
 
+# brew install --cask lookaway
+# brew install --cask nikitabobko/tap/aerospace
+# brew install --cask cheatsheet
+# brew install --cask bartender
+
 # brew install mas
 # mas install 1429033973 # runcat
 # mas install 1221250572 # xnip 
-# brew install --cask lookaway
-# brew install --cask nikitabobko/tap/aerospace

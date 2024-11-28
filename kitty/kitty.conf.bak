@@ -20,7 +20,7 @@ allow_remote_control yes
 enabled_layouts horizontal
 
 window_padding_width 0 8
-# window_padding_width 0 0
+# window_padding_width 8 8
 
 remember_window_size  no
 initial_window_width  85c
@@ -46,7 +46,7 @@ macos_option_as_alt yes
 scrollback_pager nvim -u NONE -R -M -c "lua require('kitty+page')(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN, KITTY_WINDOW_ID)" - 
 map shift+ctrl+space show_scrollback
 
-font_size 14.0
+font_size 14
 
 # narrow_symbols  2 
 
@@ -63,6 +63,6 @@ bold_italic_font auto
 
 
 # BEGIN_KITTY_THEME
-# Ayu
+# Atelier Forest Dark
 include current-theme.conf
 # END_KITTY_THEME

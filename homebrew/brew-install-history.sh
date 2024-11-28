@@ -1,0 +1,1 @@
+history | grep "brew install"

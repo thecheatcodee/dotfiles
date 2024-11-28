@@ -53,9 +53,9 @@ vim.opt.fillchars = {
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 vim.opt.autowrite = true -- Enable auto write
 
--- Prevent issues with some language servers
-vim.opt.backup = false
-vim.opt.swapfile = false
+-- -- Prevent issues with some language servers
+-- vim.opt.backup = false
+-- vim.opt.swapfile = false
 
 -- Always show minimum n lines after/before current line
 vim.opt.scrolloff = 10

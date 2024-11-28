@@ -92065,7 +92065,7 @@ Copy Mode</string>
 	<key>HideFromDockAndAppSwitcher</key>
 	<false/>
 	<key>HideMenuBarInFullscreen</key>
-	<false/>
+	<true/>
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HideTab</key>
@@ -92074,6 +92074,8 @@ Copy Mode</string>
 	<true/>
 	<key>InvalidateShadowTimesPerSecond</key>
 	<real>5</real>
+	<key>LeftTabBarWidth</key>
+	<real>114</real>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -93088,7 +93090,7 @@ Copy Mode</string>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNF-Regular 14.5</string>
+			<string>JetBrainsMonoNF-Medium 14</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Open Password Manager Automatically</key>
@@ -93222,11 +93224,11 @@ Copy Mode</string>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>4</integer>
+			<integer>3</integer>
 			<key>Title Components</key>
 			<integer>1</integer>
 			<key>Transparency</key>
-			<real>0.097185283687943269</real>
+			<real>0.069339301545086121</real>
 			<key>Unicode Normalization</key>
 			<integer>3</integer>
 			<key>Unicode Version</key>
@@ -93276,7 +93278,7 @@ Copy Mode</string>
 			<key>Use Underline Color (Light)</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>0.94999999999999996</real>
+			<real>0.93000000000000005</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -94640,13 +94642,13 @@ Copy Mode</string>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
 	<key>TabViewType</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>TerminalMargin</key>
 	<integer>10</integer>
 	<key>TerminalVMargin</key>
-	<integer>0</integer>
+	<integer>8</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
 	<key>TraditionalVisualBell</key>

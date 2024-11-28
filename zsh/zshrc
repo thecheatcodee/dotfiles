@@ -67,7 +67,8 @@ COMPLETION_WAITING_DOTS="true"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-system-clipboard)
-plugins=(git zsh-syntax-highlighting zsh-system-clipboard)
+plugins=(git zsh-syntax-highlighting)
+# plugins+=(zsh-system-clipboard) # 暂时不知道如何远程使用
 # plugins+=(zsh-vi-mode)
 
 
@@ -112,6 +113,7 @@ fi
 
 
 # PATH stuff
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export GOPATH=$HOME/Documents/go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"

@@ -97,6 +97,20 @@ elif [[ $OS_TYPE == "Linux" ]]; then
   # do something for linux
 fi
 
+# 识别当前终端
+if [ "$TERM_PROGRAM" = "vscode" ]; then
+  if command -v code >/dev/null 2>&1; then
+    export EDITOR=code
+  elif command -v cursor >/dev/null 2>&1; then
+    export EDITOR=cursor
+    export $TERM_PROGRAM=cursor
+  fi
+  export EDITOR=$(which $EDITOR) # 如果 EDITOR 是编辑器内嵌shell自带的命令，则使用 which 获取实际的编辑器
+else
+  export EDITOR=nvim
+fi
+
+
 # PATH stuff
 export GOPATH=$HOME/Documents/go
 export GOROOT="$(brew --prefix golang)/libexec"
@@ -110,15 +124,16 @@ export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_P
 # source "$HOME/.rye/env"
 . "$HOME/.cargo/env"
 
-export EDITOR=nvim 
+# export EDITOR=nvim 
 
 # Alias
 alias man='tldr'
 alias vim='nvim '
 alias ls='eza --color=always --git --icons=always --no-user'
 alias cat='bat '
+alias e='$EDITOR '
 alias y='yazi '
-alias py='python '
+alias py='python3 '
 alias nvd='neovide --frame buttonless --title-hidden'
 alias top='btop'
 alias e='$EDITOR'
@@ -126,6 +141,7 @@ alias sudo='sudo -E '
 alias ze='zellij attach'
 alias neofetch='fastfetch'
 alias grep='rg'
+alias tree='exa --tree'
 alias find='fd'
 alias lg='lazygit'
 alias del='trash'
@@ -134,7 +150,7 @@ alias repo_del="gh repo list | fzf | awk '{print $1}' | xargs gh repo delete "
 alias repo_rename="gh repo list | fzf | awk '{print \$1}' | read d && echo gh repo rename --repo \\\"\"\$d\"\\\" | read a && bash -c 'read -e -p \"new name: \" name && echo \"\$name\"'  | read e && echo \$a \\\"\$e\\\" | read b && echo \"change \\\"\$d\\\" to \\\"\$e\\\"?\" && bash -c 'read -e -p \"confirm [y|n]: \" c && echo \"\$c\"' | read c && if [[ \$c == 'y' ]]; then echo \$b; else echo 'canceled.'; fi"
 alias nvimconf="nvim ~/.config/nvim/"
 alias ob='cd "/Users/zachlu/Library/Mobile Documents/iCloud~md~obsidian/Documents/MySecondBrain"'
-alias cd='z' # TODO: 先检测z命令是否有效 
+alias zshrc='$EDITOR ~/.zshrc'
 if [[ $TERM == "xterm-kitty" ]]; then
   alias ssh="kitten ssh "
 fi
@@ -224,5 +240,6 @@ precmd_functions+=(_fix_cursor)
 eval "$(fzf --zsh)"
 # eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
+alias cd='z' # TODO: 先检测z命令是否有效 
 eval "$(starship init zsh)"
 

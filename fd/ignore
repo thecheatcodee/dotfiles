@@ -1,14 +1,21 @@
-!.config/**
+!.config
 !.zshrc
+!.local
 
+
+.cache
+.bun
 .git
 node_modules
 venv
 site-packages
 .DS_Store
 
+_cacache
+
 # Macos
 Library
+Archieved
 Pictures
 Movies
 Music

@@ -2,21 +2,24 @@ require "nvchad.options"
 
 -- add yours here!
 
-
-
 vim.g.dap_virtual_text = true
 vim.g.bookmark_sign = ""
 vim.g.skip_ts_context_commentstring_module = true
 vim.g.have_nerd_font = true
-
 
 vim.o.relativenumber = false
 
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
--- vim.opt.clipboard = "", -- 默认禁用系统剪贴板
+-- vim.opt.clipboard = "" -- 默认禁用系统剪贴板
 vim.opt.clipboard = "unnamedplus"
+local osc52 = require("vim.ui.clipboard.osc52")
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+  paste = { ["+"] = osc52.paste("+"), ["*"] = osc52.paste("*") },
+}
 
 -- indent
 vim.opt.tabstop = 2

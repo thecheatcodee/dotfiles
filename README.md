@@ -8,6 +8,7 @@ git clone https://github.com/thecheatcodee/dotfiles ~/.dotfiles/
 
 ## TODO
 
+- [ ] Neovim share 同步脚本
 - [ ] 优化Shell Prompt
 - [ ] 设置Neovim为Macos默认编辑器
 - [ ] 替换Kitty icon

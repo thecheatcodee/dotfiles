@@ -96,6 +96,7 @@ if [[ $OS_TYPE == "Darwin" ]]; then
   # do something for macos
 elif [[ $OS_TYPE == "Linux" ]]; then
   # do something for linux
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 fi
 
 # 识别当前终端
@@ -113,7 +114,6 @@ fi
 
 
 # PATH stuff
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export GOPATH=$HOME/Documents/go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
@@ -130,7 +130,6 @@ export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_P
 
 # Alias
 alias man='tldr'
-alias vim='nvim '
 alias ls='eza --color=always --git --icons=always --no-user'
 alias cat='bat '
 alias e='$EDITOR '
@@ -143,7 +142,7 @@ alias sudo='sudo -E '
 alias ze='zellij attach'
 alias neofetch='fastfetch'
 alias grep='rg'
-alias tree='exa --tree'
+alias tree='eza --tree'
 alias find='fd'
 alias lg='lazygit'
 alias del='trash'

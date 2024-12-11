@@ -2,7 +2,7 @@
 -- TODO: 去掉Lazyvim检测到文件变化时的提示
 return {
   "folke/noice.nvim",
-  enabled = true,
+  enabled = false,
   event = "VeryLazy",
 
   dependencies = {

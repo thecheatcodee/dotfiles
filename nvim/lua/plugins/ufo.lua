@@ -30,6 +30,7 @@ return {
       "luukvbaal/statuscol.nvim"
     },
     event = "VeryLazy",
+    enabled = false,
     opts = {},
     init = function()
       -- vim.o.foldcolumn = "1" -- '0' is not bad

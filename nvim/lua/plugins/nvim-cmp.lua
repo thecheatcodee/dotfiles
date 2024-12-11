@@ -1,8 +1,24 @@
 -- load luasnips + cmp related in insert mode only
+---@type NvPluginSpec
 return {
   "hrsh7th/nvim-cmp",
+
+  dependencies = {
+    "tailwind-tools",
+    "onsails/lspkind-nvim",
+    -- ...
+  },
+
   opts = function()
-    return require "configs.cmp"
+    local opts = require("configs.cmp")
+
+    -- tailwindcss config
+    opts.formatting = {
+      format = require("lspkind").cmp_format({
+        before = require("tailwind-tools.cmp").lspkind_format
+      }),
+    }
+    return opts
 
   --   local cmp = require "nvim-cmp"
   --   cmp.setup.cmdline(":", {
@@ -19,6 +35,10 @@ return {
   --     }),
   --   })
   end,
+
+  -- config = function (_, opts)
+  --
+  -- end
 
   -- `:` cmdline setup.
   -- config = function()

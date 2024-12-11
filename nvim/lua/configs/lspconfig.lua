@@ -75,12 +75,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
 
 -- Bash
 
@@ -138,7 +132,7 @@ lspconfig.ruff.setup {
 }
 
 
--- Go
+-- Golang
 
 lspconfig.gopls.setup {
 
@@ -186,42 +180,21 @@ lspconfig.gopls.setup {
 
 -- Typescript
 
--- lspconfig.eslint.setup({
---   settings = {
---     packageManager = 'bun'
---   },
---   ---@diagnostic disable-next-line: unused-local
---   on_attach = function(client, bufnr)
---     vim.api.nvim_create_autocmd("BufWritePre", {
---       buffer = bufnr,
---       command = "EslintFixAll",
---     })
---   end,
--- })
+lspconfig.eslint.setup({
+  -- settings = {
+  --   packageManager = 'bun'
+  -- },
+  ---@diagnostic disable-next-line: unused-local
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
 
-
---- @deprecated -- tsserver renamed to ts_ls but not yet released, so keep this for now
-    --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
--- lspconfig.tsserver.setup {
---       enabled = false,
---     }
--- lspconfig.ts_ls.setup {
---       enabled = false,
---     }
 
 -- Vue
-
--- lspconfig.volar.setup {
---   on_attach = on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
---   filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
---   init_options = {
---     vue = {
---       hybridMode = true,
---     },
---   },
--- }
 
 lspconfig.volar.setup({
   on_attach = on_attach,
@@ -237,105 +210,22 @@ lspconfig.volar.setup({
   },
 })
 
+-- Tailwind
 
--- lspconfig.vtsls.setup {
---
---   on_attach = on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
---   -- explicitly add default filetypes, so that we can extend
---   -- them in related extras
---   filetypes = {
---     "javascript",
---     "javascriptreact",
---     "javascript.jsx",
---     "typescript",
---     "typescriptreact",
---     "typescript.tsx",
---   },
---   settings = {
---     complete_function_calls = true,
---     vtsls = {
---       enableMoveToFileCodeAction = true,
---       autoUseWorkspaceTsdk = true,
---       experimental = {
---         completion = {
---           enableServerSideFuzzyMatch = true,
---         },
---       },
---     },
---     typescript = {
---       updateImportsOnFileMove = { enabled = "always" },
---       suggest = {
---         completeFunctionCalls = true,
---       },
---       inlayHints = {
---         enumMemberValues = { enabled = true },
---         functionLikeReturnTypes = { enabled = true },
---         parameterNames = { enabled = "literals" },
---         parameterTypes = { enabled = true },
---         propertyDeclarationTypes = { enabled = true },
---         variableTypes = { enabled = false },
---       },
---     },
---   },
---
---     vue = {
---       hybridMode = true,
---     },
---
---   -- keys = {
---   --   {
---   --     "gD",
---   --     function()
---   --       local params = vim.lsp.util.make_position_params()
---   --       LazyVim.lsp.execute({
---   --         command = "typescript.goToSourceDefinition",
---   --         arguments = { params.textDocument.uri, params.position },
---   --         open = true,
---   --       })
---   --     end,
---   --     desc = "Goto Source Definition",
---   --   },
---   --   {
---   --     "gR",
---   --     function()
---   --       LazyVim.lsp.execute({
---   --         command = "typescript.findAllFileReferences",
---   --         arguments = { vim.uri_from_bufnr(0) },
---   --         open = true,
---   --       })
---   --     end,
---   --     desc = "File References",
---   --   },
---   --   {
---   --     "<leader>co",
---   --     LazyVim.lsp.action["source.organizeImports"],
---   --     desc = "Organize Imports",
---   --   },
---   --   {
---   --     "<leader>cM",
---   --     LazyVim.lsp.action["source.addMissingImports.ts"],
---   --     desc = "Add missing imports",
---   --   },
---   --   {
---   --     "<leader>cu",
---   --     LazyVim.lsp.action["source.removeUnused.ts"],
---   --     desc = "Remove unused imports",
---   --   },
---   --   {
---   --     "<leader>cD",
---   --     LazyVim.lsp.action["source.fixAll.ts"],
---   --     desc = "Fix all diagnostics",
---   --   },
---   --   {
---   --     "<leader>cV",
---   --     function()
---   --       LazyVim.lsp.execute({ command = "typescript.selectTypeScriptVersion" })
---   --     end,
---   --     desc = "Select TS workspace version",
---   --   },
---   -- },
--- }
+lspconfig.tailwindcss.setup({
+  on_attach = on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    tailwindcss = {
+        -- exclude a filetype from the default_config
+        filetypes_exclude = { "markdown" },
+        -- add additional filetypes to the default_config
+        -- filetypes_include = {},
+        -- to fully override the default_config, change the below
+        -- filetypes = {}
+      },
+  }
 
+})
 

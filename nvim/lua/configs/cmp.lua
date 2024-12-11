@@ -12,6 +12,12 @@ local options = {
     end,
   },
 
+  formatting = {
+        format = require("lspkind").cmp_format({
+          before = require("tailwind-tools.cmp").lspkind_format
+        }),
+      },
+
 
   mapping = {
     -- ["<C-p>"] = cmp.mapping.select_prev_item(),

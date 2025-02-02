@@ -2,7 +2,7 @@
 return	{
   'uga-rosa/ccc.nvim',
   -- enabled = false,
-  event = 'FileType',
+  -- event = 'FileType', -- 不使用highlighter的话也就没必要了
   keys = {
     { '<Leader><Leader>c', '<cmd>CccPick<CR>', desc = 'Color Picker' },
   },

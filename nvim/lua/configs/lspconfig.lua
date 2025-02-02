@@ -47,7 +47,7 @@ local servers = {
   "html",
   "cssls",
   "clangd",
-  "basedpyright",
+  -- "basedpyright",
   -- "bashls",
   -- "gopls",
   "asm_lsp",
@@ -80,6 +80,9 @@ end
 
 lspconfig.bashls.setup {
   filetypes = { 'sh', 'zsh', },
+  on_attach = on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
 }
 
 -- Lua
@@ -111,24 +114,36 @@ lspconfig.lua_ls.setup {
 
 -- Python
 
-lspconfig.ruff.setup {
+-- lspconfig.ruff.setup {
+--
+--   on_attach = on_attach,
+--   on_init = nvlsp.on_init,
+--   capabilities = nvlsp.capabilities,
+--
+--   cmd_env = { RUFF_TRACE = "messages" },
+--
+--   settings = {
+--     logLevel = "error",
+--   },
+--   -- keys = {
+--   --   {
+--   --     "<leader>co",
+--   --     LazyVim.lsp.action["source.organizeImports"],
+--   --     desc = "Organize Imports",
+--   --   },
+--   -- },
+-- }
+
+lspconfig.basedpyright.setup {
 
   on_attach = on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-
-  cmd_env = { RUFF_TRACE = "messages" },
-
   settings = {
-    logLevel = "error",
-  },
-  -- keys = {
-  --   {
-  --     "<leader>co",
-  --     LazyVim.lsp.action["source.organizeImports"],
-  --     desc = "Organize Imports",
-  --   },
-  -- },
+            basedpyright = {
+              typeCheckingMode = "standard",
+            },
+          },
 }
 
 

@@ -107,4 +107,8 @@ end
 -- Prevent auto comment new line
 vim.opt.formatoptions:remove { "c", "r", "o" }
 
+vim.opt.jumpoptions = "stack"
 
+-- vim.cmd [[
+--  set jumpoptions+=stack
+-- ]]

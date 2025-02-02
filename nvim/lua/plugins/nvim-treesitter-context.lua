@@ -1,7 +1,8 @@
 ---@type NvPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter-context",
-  event = "BufEnter",
+  -- event = "BufEnter",
+  event = "VeryLazy",
   opts = {
       enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
       multiwindow = false, -- Enable multiwindow support.
